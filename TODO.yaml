@@ -1,0 +1,4 @@
+Add PWA installation
+Add button to submit form to backend PHP file (maybe php?), which saves it to some kind of database (sql?)
+Add button to clear form
+Add year selector - shows different form
