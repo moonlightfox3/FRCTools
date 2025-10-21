@@ -9,12 +9,153 @@
         background-color: black;
         color: lightgray;
     }
+
+    button, input, textarea {
+        background-color: lightgray;
+        border-radius: 5px;
+    }
+    button:not([disabled]) {
+        cursor: pointer;
+    }
+    textarea {
+        width: 344px;
+        height: 225px;
+        resize: none;
+    }
+
+    div {
+        position: absolute;
+        top: 5px;
+    }
+    div#formPart1 {
+        left: 5px;
+    }
+    div#formPart2 {
+        left: 495px;
+    }
+	div#formPart3 {
+		left: 680px;
+	}
 </style>
 
+<div id="formPart1">
+    Main:<br>
+    <input id="matchNum" placeholder="Match Number (ex. Qual 1)" autofocus><input id="teamNum" placeholder="Team Number (ex. 1234)"><br>
+    <label for="robotCame">Robot showed up:</label><input type="checkbox" id="robotCame" checked><br>
+    <br>
 
+    Auto:<br>
+    <label for="autoPastLine">Left starting line:</label><input type="checkbox" id="autoPastLine" checked><br>
+    Coral:<br>
+    L1: <input type="number" id="autoCoralL1" value="0" placeholder="Hits"><input type="number" id="autoCoralL1Miss" value="0" placeholder="Misses"><br>
+    L2: <input type="number" id="autoCoralL2" value="0" placeholder="Hits"><input type="number" id="autoCoralL2Miss" value="0" placeholder="Misses"><br>
+    L3: <input type="number" id="autoCoralL3" value="0" placeholder="Hits"><input type="number" id="autoCoralL3Miss" value="0" placeholder="Misses"><br>
+    L4: <input type="number" id="autoCoralL4" value="0" placeholder="Hits"><input type="number" id="autoCoralL4Miss" value="0" placeholder="Misses"><br>
+    Algae:<br>
+    Processor: <input type="number" id="autoAlgaeProc" value="0" placeholder="Hits"><input type="number" id="autoAlgaeProcMiss" value="0" placeholder="Misses"><br>
+    Net: <input type="number" id="autoAlgaeNet" value="0" placeholder="Hits"><input type="number" id="autoAlgaeNetMiss" value="0" placeholder="Misses"><br>
+    Descore: <input type="number" id="autoAlgaeDesc" value="0" placeholder="Hits"><input type="number" id="autoAlgaeDescMiss" value="0" placeholder="Misses"><br>
+    <br>
+
+    Teleop:<br>
+    Coral:<br>
+    L1: <input type="number" id="opCoralL1" value="0" placeholder="Hits"><input type="number" id="opCoralL1Miss" value="0" placeholder="Misses"><br>
+    L2: <input type="number" id="opCoralL2" value="0" placeholder="Hits"><input type="number" id="opCoralL2Miss" value="0" placeholder="Misses"><br>
+    L3: <input type="number" id="opCoralL3" value="0" placeholder="Hits"><input type="number" id="opCoralL3Miss" value="0" placeholder="Misses"><br>
+    L4: <input type="number" id="opCoralL4" value="0" placeholder="Hits"><input type="number" id="opCoralL4Miss" value="0" placeholder="Misses"><br>
+    Algae:<br>
+    Processor: <input type="number" id="opAlgaeProc" value="0" placeholder="Hits"><input type="number" id="opAlgaeProcMiss" value="0" placeholder="Misses"><br>
+    Net: <input type="number" id="opAlgaeNet" value="0" placeholder="Hits"><input type="number" id="opAlgaeNetMiss" value="0" placeholder="Misses"><br>
+    Descore: <input type="number" id="opAlgaeDesc" value="0" placeholder="Hits"><input type="number" id="opAlgaeDescMiss" value="0" placeholder="Misses"><br>
+</div>
+<div id="formPart2">
+    Ending:<br>
+    <input type="radio" id="endPosPark" name="endPos" value="park"><label for="endPosPark">Park</label><br>
+    <input type="radio" id="endPosDeep" name="endPos" value="deep"><label for="endPosDeep">Deep</label><br>
+    <input type="radio" id="endPosDeepFail" name="endPos" value="deepFail"><label for="endPosDeepFail">Deep Fail</label><br>
+    <input type="radio" id="endPosShallow" name="endPos" value="shallow"><label for="endPosShallow">Shallow</label><br>
+    <input type="radio" id="endPosShallowFail" name="endPos" value="shallowFail"><label for="endPosShallowFail">Shallow Fail</label><br>
+    <input type="radio" id="endPosFail" name="endPos" value="fail" checked><label for="endPosFail">Fail</label><br>
+    <br>
+
+    Resisting from defense:<br>
+    <input type="radio" id="resistDefStrong" name="resistDef" value="strong"><label for="resistDefStrong">Strong</label><br>
+    <input type="radio" id="resistDefWeak" name="resistDef" value="weak"><label for="resistDefWeak">Weak</label><br>
+    <input type="radio" id="resistDefNone" name="resistDef" value="none" checked><label for="resistDefNone">None</label><br>
+	<br>
+	
+	Playing defense type:<br>
+	<input type="radio" id="playDefActive" name="playDef" value="active"><label for="playDefActive">Passive</label><br>
+	<input type="radio" id="playDefPassive" name="playDef" value="passive"><label for="playDefPassive">Active</label><br>
+	<input type="radio" id="playDefNone" name="playDef" value="none" checked><label for="playDefNone">None</label><br>
+	Playing defense strength:<br>
+	<input type="radio" id="playDefStrenVWeak" name="playDefStren" value="vWeak"><label for="playDefStrenVWeak">Very weak</label><br>
+	<input type="radio" id="playDefStrenWeak" name="playDefStren" value="weak"><label for="playDefStrenWeak">Weak</label><br>
+	<input type="radio" id="playDefStrenAvg" name="playDefStren" value="avg"><label for="playDefStrenAvg">Average</label><br>
+	<input type="radio" id="playDefStrenStrong" name="playDefStren" value="strong"><label for="playDefStrenStrong">Strong</label><br>
+	<input type="radio" id="playDefStrenVStrong" name="playDefStren" value="vStrong"><label for="playDefStrenVStrong">Very strong</label><br>
+	<input type="radio" id="playDefStrenNone" name="playDefStren" value="none" checked><label for="playDefStrenNone">None</label><br>
+</div>
+<div id="formPart3">
+    Seconds broken down:<br>
+	<input type="radio" id="breakSec10" name="breakSec" value="10"><label for="breakSec10">1-10</label><br>
+	<input type="radio" id="breakSec30" name="breakSec" value="30"><label for="breakSec30">11-30</label><br>
+	<input type="radio" id="breakSec60" name="breakSec" value="60"><label for="breakSec60">31-60</label><br>
+	<input type="radio" id="breakSecMore" name="breakSec" value="more"><label for="breakSecMore">61+</label><br>
+	<input type="radio" id="breakSecNone" name="breakSec" value="none" checked><label for="breakSecNone">None</label><br>
+	<br>
+
+	Misc notes:<br>
+    <textarea id="notes" placeholder="Notes" spellcheck="false"></textarea>
+</div>
 
 <script>
-    // Bind keys to actions (ex. increase coral l4 hit count, etc.)
-    // Display similar to offline_scouting.html? Might be better to redesign to look cleaner and more colorful (maybe include field disabling based on checkboxes?)
-    // Keys can be rebound
+    // Keys don't trigger if either the match number input box, team number input box, or notes input box are focused
+    // Keys can be rebound - there's always list of keys on the right side of the screen, which can be scrolled through if needed, and that can be changed anytime (and will save to localstorage)
+    // Tab key used for element navigation
+    // 
+    // Enter match number (ex. Qual 1) and team number (ex. 1234) first
+    // Also enter if the robot showed up (toggle, default true) and if the robot left the starting line in auto (toggle, default true)
+    // Default keys:
+    //  Space - Toggle stage (auto/teleop)
+    //  ; - Invert action where applicable (hold + press other key, ex. Coral L1 hit -> -1 Coral L1 hit)
+    //  P - Focus notes field
+    //  A - Coral L1 hit
+    //  S - Coral L2 hit
+    //  D - Coral L3 hit
+    //  F - Coral L4 hit
+    //  Q - Coral L1 miss
+    //  W - Coral L2 miss
+    //  E - Coral L3 miss
+    //  R - Coral L4 miss
+    //  J - Algae processor hit
+    //  K - Algae net hit
+    //  L - Algae descore hit
+    //  U - Algae processor miss
+    //  I - Algae net miss
+    //  O - Algae descore miss
+    //  Z - Resisting from defense (none)
+    //  X - Resisting from defense (weak)
+    //  C - Resisting from defense (strong)
+    //  V - Playing defense type (none)
+    //  G - Playing defense type (passive)
+    //  H - Playing defense type (active)
+    //  N - Seconds broken down (1-10)
+    //  M - Seconds broken down (11-30)
+    //  , - Seconds broken down (31-60)
+    //  . - Seconds broken down (61+)
+    //  / - Seconds broken down (none)
+    //  2 - Playing defense strength (very weak)
+    //  3 - Playing defense strength (weak)
+    //  4 - Playing defense strength (average)
+    //  8 - Playing defense strength (strong)
+    //  9 - Playing defense strength (very strong)
+    //  0 - Playing defense strength (none)
+    // Unused keys:
+    //  T, Y, B
+    //  1, 5, 6, 7
+    //  `, -, =, [, ], \, '
+    //  Shift, Ctrl, Alt, Backspace
+    // Enter the ending type after (park, deep, deep fail, shallow, shallow fail, fail)
+    // Also enter notes (large input box)
 </script>
