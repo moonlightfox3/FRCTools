@@ -89,7 +89,47 @@ const keyNamesInvertedOverride = {
 //
 // Keys don't trigger if either the match number input box, team number input box, or notes input box are focused
 // Keys can be rebound (and will save to LocalStorage)
-// Tab key used for element navigation
 // 
 // Enter match number (ex. Qual 1) and team number (ex. 1234) before the match
 // Enter notes (large input box) after the match
+
+let keyNames = {}
+let keyNamesInverted = {}
+for (let key of Object.keys(keys)) {
+    let hasOverride = keyNamesOverride[key] != undefined, hasInvertedOverride = keyNamesInvertedOverride[key] != undefined
+    let str = ""
+    if (!hasOverride || !hasInvertedOverride) {
+        for (let i = 0; i < key.length; i++) {
+            let char = key[i]
+            if (!isNaN(char) && char != " ") {
+                if (i > 0 && key[i - 1].toLowerCase() == key[i - 1] && key[i - 1].toUpperCase() != key[i - 1]) str += " "
+                str += char
+            } else if (char.toUpperCase() == char && char.toLowerCase() != char) {
+                if (i > 0 && key[i - 1] != "_") str += ` ${char.toLowerCase()}`
+                else str += char
+            } else if (char == "_") str += " - "
+            else {
+                if (i == 0) str += char.toUpperCase()
+                else str += char
+            }
+        }
+    }
+    
+    if (hasOverride) keyNames[key] = keyNamesOverride[key]
+    else keyNames[key] = str
+    if (hasInvertedOverride) keyNamesInverted[key] = keyNamesInvertedOverride[key]
+    else keyNamesInverted[key] = str
+}
+
+let invertKeys = false
+onkeydown = function (ev) {
+    if (ev.repeat) return
+    let key = ev.key.toLowerCase()
+
+    if (key == keys.invertAction) invertKeys = true
+}
+onkeyup = function (ev) {
+    let key = ev.key.toLowerCase()
+
+    if (key == keys.invertAction) invertKeys = false
+}
