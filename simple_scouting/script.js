@@ -4,10 +4,11 @@ if (isPWA) {
 
     if (window.launchQueue != undefined) {
         launchQueue.setConsumer(async function (params) {
-            let files = params.files
-            let file = await files[0].getFile()
-            let buf = await file.arrayBuffer()
-            handleDataImport(buf)
+            if (params.files.length > 0) {
+                let file = await params.files[0].getFile()
+                let buf = await file.arrayBuffer()
+                handleDataImport(buf)
+            }
         })
     }
 }
