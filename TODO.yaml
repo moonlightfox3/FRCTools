@@ -6,3 +6,4 @@ simple_scouting.html
     Add button to clear form
     Add competition year selector - shows different form
     Add onbeforeunload event to confirm page exit (only triggers if any form value isn't at its default)
+    Add input history - stack, updates when pressing keys

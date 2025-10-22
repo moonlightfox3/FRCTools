@@ -123,14 +123,40 @@ for (let key of Object.keys(keys)) {
 }
 
 let invertKeys = false
+let matchStageIsTeleop = false
 onkeydown = function (ev) {
     if (ev.repeat) return
     let key = ev.key.toLowerCase()
 
     if (key == keys.invertAction) invertKeys = true
+    else if (key == keys.switchStageTeleop) matchStageIsTeleop = true
+    else if (key == keys.switchStageAuto) matchStageIsTeleop = false
+    else if (key == keys.toggleRobotCame) robotCame.checked = !robotCame.checked
+    else if (key == keys.toggleRobotAutoLeftStart) autoPastLine.checked = !autoPastLine.checked
+    else if (key == keys.focusNotesField) notes.focus()
+    else if (key == keys.coralL1Hit) modifyInputValue(opCoralL1, autoCoralL1)
+    else if (key == keys.coralL2Hit) modifyInputValue(opCoralL2, autoCoralL2)
+    else if (key == keys.coralL3Hit) modifyInputValue(opCoralL3, autoCoralL3)
+    else if (key == keys.coralL4Hit) modifyInputValue(opCoralL4, autoCoralL4)
+    else if (key == keys.coralL1Miss) modifyInputValue(opCoralL1Miss, autoCoralL1Miss)
+    else if (key == keys.coralL2Miss) modifyInputValue(opCoralL2Miss, autoCoralL2Miss)
+    else if (key == keys.coralL3Miss) modifyInputValue(opCoralL3Miss, autoCoralL3Miss)
+    else if (key == keys.coralL4Miss) modifyInputValue(opCoralL4Miss, autoCoralL4Miss)
+    else if (key == keys.algaeProcessorHit) modifyInputValue(opAlgaeProc, autoAlgaeProc)
+    else if (key == keys.algaeNetHit) modifyInputValue(opAlgaeNet, autoAlgaeNet)
+    else if (key == keys.algaeDescoreHit) modifyInputValue(opAlgaeDesc, autoAlgaeDesc)
+    else if (key == keys.algaeProcessorMiss) modifyInputValue(opAlgaeProcMiss, autoAlgaeProcMiss)
+    else if (key == keys.algaeNetMiss) modifyInputValue(opAlgaeNetMiss, autoAlgaeNetMiss)
+    else if (key == keys.algaeDescoreMiss) modifyInputValue(opAlgaeDescMiss, autoAlgaeDescMiss)
 }
 onkeyup = function (ev) {
     let key = ev.key.toLowerCase()
 
     if (key == keys.invertAction) invertKeys = false
+}
+
+function modifyInputValue (inputTeleop, inputAuto, modify = 1, canInvert = true) {
+    let val = canInvert && invertKeys ? -modify : modify
+    if (matchStageIsTeleop) inputTeleop.value = parseInt(inputTeleop.value) + val
+    else inputAuto.value = parseInt(inputAuto.value) + val
 }
