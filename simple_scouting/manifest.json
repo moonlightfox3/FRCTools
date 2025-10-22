@@ -9,7 +9,6 @@
 		{
 			"src": "icon.svg",
 			"sizes": "any",
-			"type": "image/svg+xml",
 			"purpose": "maskable"
 		}
 	],
