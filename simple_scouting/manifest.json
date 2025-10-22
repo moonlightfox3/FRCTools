@@ -3,13 +3,15 @@
 	"display": "standalone",
 	"file_handlers": [{
 		"action": "index.html",
-		"accept": {"application/octet-stream": [".smscdt"]}
+		"accept": {
+			"application/octet-stream": [".smscdt"]
+		}
 	}],
 	"icons": [
 		{
 			"src": "icon.svg",
 			"sizes": "any",
-			"purpose": "maskable"
+			"purpose": "maskable any"
 		}
 	],
 	"name": "Simple Scouting for FRC",
