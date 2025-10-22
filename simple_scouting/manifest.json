@@ -13,6 +13,7 @@
 	],
 	"name": "Simple Scouting for FRC",
 	"orientation": "landscape",
+	"short_name": "Simple Scouting",
 	"start_url": "index.html",
 	"theme_color": "darkviolet"
 }
