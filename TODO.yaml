@@ -1,8 +1,7 @@
 simple_scouting.html
     Add PWA installation
         Add page caching
-        Ad custom install button
-    Add button to submit form to backend PHP file (maybe php?), which saves it to some kind of database (sql?)
+    (Maybe) Add button to submit form to backend PHP file (maybe php?), which saves it to some kind of database (sql?)
         Add button to save match data as file
     Add button to clear form
     Add year selector - shows different form
