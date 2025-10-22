@@ -1,8 +1,8 @@
 simple_scouting.html
-    Add PWA installation
-        Add page caching
+    Add PWA page caching (service worker)
     (Maybe) Add button to submit form to backend PHP file (maybe php?), which saves it to some kind of database (sql?)
-        Add button to save match data as file
+        Add button to save (and download) match data as file (.smscdt)
+
     Add button to clear form
-    Add year selector - shows different form
+    Add competition year selector - shows different form
     Add onbeforeunload event to confirm page exit (only triggers if any form value isn't at its default)
