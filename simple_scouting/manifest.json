@@ -3,7 +3,7 @@
 	"display": "standalone",
 	"file_handlers": [{
 		"action": "index.html",
-		"accept": {"*/*": [".smscdt"]} // .smscdt (SimpleScoutingData) is a match data file, which could be put in a database
+		"accept": {"application/octet-stream": [".smscdt"]} // .smscdt (SimpleScoutingData) is a match data file, which could be put in a database
 	}],
 	"icons": [
 		{
