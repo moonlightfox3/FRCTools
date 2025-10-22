@@ -1,7 +1,13 @@
-function isPWA () {
-    return matchMedia("(display-mode: standalone)").matches
+const isPWA = matchMedia("(display-mode: standalone)").matches
+if (isPWA) {
+    resizeTo(1090, 580)
+
+    if (window.launchQueue != undefined) {
+        launchQueue.setConsumer(function (params) {
+            console.debug(params)
+        })
+    }
 }
-if (isPWA()) resizeTo(1090, 580)
 
 // Keys don't trigger if either the match number input box, team number input box, or notes input box are focused
 // Keys can be rebound - there's always list of keys on the right side of the screen, which can be scrolled through if needed, and that can be changed anytime (and will save to localstorage)

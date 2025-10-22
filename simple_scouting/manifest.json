@@ -1,10 +1,10 @@
 {
 	"background_color": "black",
 	"display": "standalone",
-//	"file_handlers": [{
-//		"action": "index.html", // TODO (add JS to handle files - one at a time)
-//		"accept": {"*/*": [".smscdt"]} // .smscdt (SimpleScoutingData) is a match data file, which can be put in a database
-//	}],
+	"file_handlers": [{
+		"action": "index.html",
+		"accept": {"*/*": [".smscdt"]} // .smscdt (SimpleScoutingData) is a match data file, which could be put in a database
+	}],
 	"icons": [
 		{
 			"src": "icon.svg",
@@ -13,7 +13,6 @@
 	],
 	"name": "Simple Scouting for FRC",
 	"orientation": "landscape",
-	"short_name": "Simple Scouting",
 	"start_url": "index.html",
 	"theme_color": "darkviolet"
 }
