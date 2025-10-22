@@ -126,7 +126,9 @@ let invertKeys = false
 let matchStageIsTeleop = false
 onkeydown = function (ev) {
     if (ev.repeat) return
+    if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let key = ev.key.toLowerCase()
+    let shouldCancel = true
 
     if (key == keys.invertAction) invertKeys = true
     else if (key == keys.switchStageTeleop) matchStageIsTeleop = true
@@ -148,11 +150,30 @@ onkeydown = function (ev) {
     else if (key == keys.algaeProcessorMiss) modifyInputValue(opAlgaeProcMiss, autoAlgaeProcMiss)
     else if (key == keys.algaeNetMiss) modifyInputValue(opAlgaeNetMiss, autoAlgaeNetMiss)
     else if (key == keys.algaeDescoreMiss) modifyInputValue(opAlgaeDescMiss, autoAlgaeDescMiss)
+    else if (key == keys.defenseResistance_None) resistDefNone.checked = true
+    else if (key == keys.defenseResistance_Weak) resistDefWeak.checked = true
+    else if (key == keys.defenseResistance_Strong) resistDefStrong.checked = true
+    else if (key == keys.playingDefenseType_None) playDefNone.checked = true
+    else if (key == keys.playingDefenseType_Passive) playDefPassive.checked = true
+    else if (key == keys.playingDefenseType_Active) playDefActive.checked = true
+    else if (key == keys.secondsBroken_1To10) breakSec10.checked = true
+    else if (key == keys.secondsBroken_11To30) breakSec30.checked = true
+    else if (key == keys.secondsBroken_31To60) breakSec60.checked = true
+    else if (key == keys.secondsBroken_Over60) breakSecMore.checked = true
+    else if (key == keys.secondsBroken_None) breakSecNone.checked = true
+
+    else shouldCancel = false
+    if (shouldCancel) ev.preventDefault()
 }
 onkeyup = function (ev) {
+    if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let key = ev.key.toLowerCase()
+    let shouldCancel = true
 
     if (key == keys.invertAction) invertKeys = false
+    
+    else shouldCancel = false
+    if (shouldCancel) ev.preventDefault()
 }
 
 function modifyInputValue (inputTeleop, inputAuto, modify = 1, canInvert = true) {
