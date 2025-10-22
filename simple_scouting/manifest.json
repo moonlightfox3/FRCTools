@@ -11,7 +11,12 @@
 		{
 			"src": "icon.svg",
 			"sizes": "any",
-			"purpose": "maskable any"
+			"purpose": "maskable"
+		},
+		{
+			"src": "icon.svg",
+			"sizes": "any",
+			"purpose": "any"
 		}
 	],
 	"name": "Simple Scouting for FRC",
