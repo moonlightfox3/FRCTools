@@ -8,7 +8,9 @@
 	"icons": [
 		{
 			"src": "icon.svg",
-			"sizes": "any"
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "maskable"
 		}
 	],
 	"name": "Simple Scouting for FRC",
