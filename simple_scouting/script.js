@@ -87,8 +87,6 @@ const keyNamesInvertedOverride = {
 //  1, `, -, =, [, ], \, '
 //  Shift, Ctrl, Alt, Backspace, Enter
 
-//
-// Keys don't trigger if either the match number input box, team number input box, or notes input box are focused
 // Keys can be rebound (and will save to LocalStorage)
 // 
 // Enter match number (ex. Qual 1) and team number (ex. 1234) before the match
@@ -126,9 +124,10 @@ let invertKeys = false
 let matchStageIsTeleop = false
 onkeydown = function (ev) {
     if (ev.repeat) return
+
+    let key = ev.key.toLowerCase()
     if (key == "Escape") return document.activeElement.blur()
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
-    let key = ev.key.toLowerCase()
     let shouldCancel = true
 
     if (key == keys.invertAction) invertKeys = true
@@ -176,8 +175,9 @@ onkeydown = function (ev) {
     if (shouldCancel) ev.preventDefault()
 }
 onkeyup = function (ev) {
-    if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let key = ev.key.toLowerCase()
+    if (key == "Escape") return
+    if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let shouldCancel = true
 
     if (key == keys.invertAction) invertKeys = false
