@@ -129,6 +129,13 @@ onkeydown = function (ev) {
 
     let key = ev.key.toLowerCase()
     if (key == "escape") return document.activeElement.blur()
+    else if (key == "tab") {
+        ev.preventDefault()
+        if (document.activeElement == matchNum) teamNum.focus()
+        else if (document.activeElement == teamNum) matchNum.focus()
+        else if (document.activeElement == notes) notes.value = notes.value.substring(0, notes.selectionStart) + " ".repeat(tabSize) + notes.value.substring(notes.selectionEnd)
+        return
+    }
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let shouldCancel = true
 
@@ -173,12 +180,6 @@ onkeydown = function (ev) {
     else if (key == keys.endType_Deep) invertKeys ? endPosDeepFail.checked = true : endPosDeep.checked = true
     else if (key == keys.endType_Shallow) invertKeys ? endPosShallowFail.checked = true : endPosShallow.checked = true
 
-    else if (key == "tab") {
-        if (document.activeElement == matchNum) teamNum.focus()
-        else if (document.activeElement == teamNum) matchNum.focus()
-        else if (document.activeElement == notes) notes.value = notes.value.substring(0, notes.selectionStart) + " ".repeat(tabSize) + notes.value.substring(notes.selectionEnd)
-    }
-
     else shouldCancel = false
     if (shouldCancel) ev.preventDefault()
 }
@@ -187,6 +188,7 @@ onkeyup = function (ev) {
 
     let key = ev.key.toLowerCase()
     if (key == "escape") return
+    else if (key == "tab") return
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let shouldCancel = true
 
