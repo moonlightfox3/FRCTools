@@ -161,6 +161,15 @@ onkeydown = function (ev) {
     else if (key == keys.secondsBroken_31To60) breakSec60.checked = true
     else if (key == keys.secondsBroken_Over60) breakSecMore.checked = true
     else if (key == keys.secondsBroken_None) breakSecNone.checked = true
+    else if (key == keys.playingDefenseStrength_VeryWeak) playDefStrenVWeak.checked = true
+    else if (key == keys.playingDefenseStrength_Weak) playDefStrenWeak.checked = true
+    else if (key == keys.playingDefenseStrength_Average) playDefStrenAvg.checked = true
+    else if (key == keys.playingDefenseStrength_Strong) playDefStrenStrong.checked = true
+    else if (key == keys.playingDefenseStrength_VeryStrong) playDefStrenVStrong.checked = true
+    else if (key == keys.playingDefenseStrength_None) playDefStrenNone.checked = true
+    else if (key == keys.endType_Park) invertKeys ? endPosFail.checked = true : endPosPark.checked = true
+    else if (key == keys.endType_Deep) invertKeys ? endPosDeepFail.checked = true : endPosDeep.checked = true
+    else if (key == keys.endType_Shallow) invertKeys ? endPosShallowFail.checked = true : endPosShallow.checked = true
 
     else shouldCancel = false
     if (shouldCancel) ev.preventDefault()
