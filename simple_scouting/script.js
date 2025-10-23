@@ -1,6 +1,6 @@
 const isPWA = matchMedia("(display-mode: standalone)").matches
 if (isPWA) {
-    resizeTo(1090, 580)
+    resizeTo(1090, 575)
 
     if (window.launchQueue != undefined) {
         launchQueue.setConsumer(async function (params) {
