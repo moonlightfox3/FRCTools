@@ -58,6 +58,7 @@ let keys = {
     endType_Deep: "6",
     endType_Shallow: "7",
 }
+let tabSize = 4
 const keyNamesOverride = {
     switchStageTeleop: "Switch to teleop stage",
     switchStageAuto: "Switch to auto stage",
@@ -124,6 +125,7 @@ let invertKeys = false
 let matchStageIsTeleop = false
 onkeydown = function (ev) {
     if (ev.repeat) return
+    if (ev.ctrlKey || ev.altKey || ev.metaKey) return
 
     let key = ev.key.toLowerCase()
     if (key == "escape") return document.activeElement.blur()
@@ -135,7 +137,7 @@ onkeydown = function (ev) {
     else if (key == keys.switchStageAuto) matchStageIsTeleop = false
     else if (key == keys.toggleRobotCame) robotCame.checked = !robotCame.checked
     else if (key == keys.toggleRobotAutoLeftStart) autoPastLine.checked = !autoPastLine.checked
-    else if (key == keys.focusNotesField) notes.focus()
+    else if (key == keys.focusNotesField) invertKeys ? matchNum.focus() : notes.focus()
     else if (key == keys.coralL1Hit) modifyInputValue(opCoralL1, autoCoralL1)
     else if (key == keys.coralL2Hit) modifyInputValue(opCoralL2, autoCoralL2)
     else if (key == keys.coralL3Hit) modifyInputValue(opCoralL3, autoCoralL3)
@@ -171,10 +173,18 @@ onkeydown = function (ev) {
     else if (key == keys.endType_Deep) invertKeys ? endPosDeepFail.checked = true : endPosDeep.checked = true
     else if (key == keys.endType_Shallow) invertKeys ? endPosShallowFail.checked = true : endPosShallow.checked = true
 
+    else if (key == "tab") {
+        if (document.activeElement == matchNum) teamNum.focus()
+        else if (document.activeElement == teamNum) matchNum.focus()
+        else if (document.activeElement == notes) notes.value = notes.value.substring(0, notes.selectionStart) + " ".repeat(tabSize) + notes.value.substring(notes.selectionEnd)
+    }
+
     else shouldCancel = false
     if (shouldCancel) ev.preventDefault()
 }
 onkeyup = function (ev) {
+    if (ev.ctrlKey || ev.altKey || ev.metaKey) return
+
     let key = ev.key.toLowerCase()
     if (key == "escape") return
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
