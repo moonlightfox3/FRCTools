@@ -188,18 +188,8 @@ onkeydown = function (ev) {
     if (shouldCancel) ev.preventDefault()
 }
 onkeyup = function (ev) {
-    if (ev.ctrlKey || ev.altKey || ev.metaKey) return
-
     let key = ev.key.toLowerCase()
-    if (key == "escape") return
-    else if (key == "tab") return
-    if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
-    let shouldCancel = true
-
     if (key == keys.invertAction) invertKeys = false
-    
-    else shouldCancel = false
-    if (shouldCancel) ev.preventDefault()
 }
 
 function modifyInputValue (inputTeleop, inputAuto, modify = 1, canInvert = true) {
