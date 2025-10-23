@@ -43,17 +43,17 @@ let keys = {
     playingDefenseType_None: "v",
     playingDefenseType_Passive: "g",
     playingDefenseType_Active: "h",
-    secondsBroken_1To10: "n",
-    secondsBroken_11To30: "m",
-    secondsBroken_31To60: ",",
-    secondsBroken_Over60: ".",
-    secondsBroken_None: "/",
-    playingDefenseStrength_VeryWeak: "2",
-    playingDefenseStrength_Weak: "3",
-    playingDefenseStrength_Average: "4",
-    playingDefenseStrength_Strong: "8",
-    playingDefenseStrength_VeryStrong: "9",
-    playingDefenseStrength_None: "0",
+    secondsBroken_1To10: "3",
+    secondsBroken_11To30: "4",
+    secondsBroken_31To60: "8",
+    secondsBroken_Over60: "9",
+    secondsBroken_None: "0",
+    playingDefenseStrength_VeryWeak: "n",
+    playingDefenseStrength_Weak: "m",
+    playingDefenseStrength_Average: ",",
+    playingDefenseStrength_Strong: ".",
+    playingDefenseStrength_VeryStrong: "/",
+    playingDefenseStrength_None: "'",
     endType_Park: "5",
     endType_Deep: "6",
     endType_Shallow: "7",
@@ -85,13 +85,8 @@ const keyNamesInvertedOverride = {
     endType_Shallow: "End type - Shallow fail",
 }
 // Unused keys:
-//  1, `, -, =, [, ], \, '
-//  Shift, Ctrl, Alt, Backspace, Enter
-
-// Keys can be rebound (and will save to LocalStorage)
-// 
-// Enter match number (ex. Qual 1) and team number (ex. 1234) before the match
-// Enter notes (large input box) after the match
+//  `, 1, 2, -, =, [, ], \
+//  Backspace, Enter
 
 let keyNames = {}
 let keyNamesInverted = {}

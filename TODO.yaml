@@ -1,4 +1,8 @@
 simple_scouting.html
+    Add PlayStation (PS4) controller support (in addition to keyboard)
+        Try to get it working on a phone too (with an adapter)
+    Keys can be rebound (and will save to LocalStorage)
+
     Add PWA page caching (service worker)
     (Maybe) Add button to submit form to backend PHP file (maybe php?), which saves it to some kind of database (sql?)
         Add button to save (and download) match data as file (.smscdt)
