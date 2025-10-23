@@ -133,7 +133,11 @@ onkeydown = function (ev) {
         ev.preventDefault()
         if (document.activeElement == matchNum) teamNum.focus()
         else if (document.activeElement == teamNum) matchNum.focus()
-        else if (document.activeElement == notes) notes.value = notes.value.substring(0, notes.selectionStart) + " ".repeat(tabSize) + notes.value.substring(notes.selectionEnd)
+        else if (document.activeElement == notes) {
+            let pos = notes.selectionStart
+            notes.value = notes.value.substring(0, pos) + " ".repeat(tabSize) + notes.value.substring(notes.selectionEnd)
+            notes.selectionStart = pos + 4
+        }
         return
     }
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
