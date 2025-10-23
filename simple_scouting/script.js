@@ -126,7 +126,7 @@ onkeydown = function (ev) {
     if (ev.repeat) return
 
     let key = ev.key.toLowerCase()
-    if (key == "Escape") return document.activeElement.blur()
+    if (key == "escape") return document.activeElement.blur()
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let shouldCancel = true
 
@@ -176,7 +176,7 @@ onkeydown = function (ev) {
 }
 onkeyup = function (ev) {
     let key = ev.key.toLowerCase()
-    if (key == "Escape") return
+    if (key == "escape") return
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let shouldCancel = true
 
