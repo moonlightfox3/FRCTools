@@ -129,8 +129,9 @@ onkeydown = function (ev) {
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let key = ev.key.toLowerCase()
     let shouldCancel = true
+    if (key == "Escape") document.activeElement.blur()
 
-    if (key == keys.invertAction) invertKeys = true
+    else if (key == keys.invertAction) invertKeys = true
     else if (key == keys.switchStageTeleop) matchStageIsTeleop = true
     else if (key == keys.switchStageAuto) matchStageIsTeleop = false
     else if (key == keys.toggleRobotCame) robotCame.checked = !robotCame.checked
@@ -178,8 +179,9 @@ onkeyup = function (ev) {
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
     let key = ev.key.toLowerCase()
     let shouldCancel = true
+    if (key == "Escape") null
 
-    if (key == keys.invertAction) invertKeys = false
+    else if (key == keys.invertAction) invertKeys = false
     
     else shouldCancel = false
     if (shouldCancel) ev.preventDefault()
