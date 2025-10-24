@@ -1,7 +1,7 @@
 simple_scouting.html
     Add PlayStation (PS4) controller support (in addition to keyboard)
         Try to get it working on a phone too (with an adapter)
-    Keys can be rebound (and will save to LocalStorage)
+    Add key rebinding (which will save to LocalStorage)
     
     Add onbeforeunload event to confirm page exit (only triggers if any form value isn't at its default)
     Add button to save (and download) match data as file (.smscdt)
