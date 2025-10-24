@@ -1,19 +1,19 @@
 class Gamepads {
     static setConnectListener (callback = () => {}) {
-        addEventListener("gamepadconnected", ev => callback(new SimpleGamepad(ev.gamepad.index)))
+        addEventListener("gamepadconnected", ev => callback(new SimpleGamepad(ev.gamepad)))
     }
     static setDisconnectListener (callback = () => {}) {
-        addEventListener("gamepaddisconnected", ev => callback(new SimpleGamepad(ev.gamepad.index)))
+        addEventListener("gamepaddisconnected", ev => callback(new SimpleGamepad(ev.gamepad)))
     }
     static getGamepads () {
-        return navigator.getGamepads().filter(val => val?.connected).map(val => new SimpleGamepad(val.index))
+        return navigator.getGamepads().filter(val => val?.connected).map(val => new SimpleGamepad(val))
     }
 }
 class SimpleGamepad {
     #gamepad
     #cursor
-    constructor (index) {
-        this.#gamepad = navigator.getGamepads()[index]
+    constructor (gamepad) {
+        this.#gamepad = gamepad
         this.#cursor = new SimpleGamepadCursor(this)
     }
 
