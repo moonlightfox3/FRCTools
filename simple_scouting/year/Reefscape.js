@@ -87,7 +87,6 @@ const keyNamesInvertedOverride = {
 // Unused keys:
 //  `, 1, 2, -, =, [, ], \
 //  Backspace, Enter
-
 let keyNames = {}
 let keyNamesInverted = {}
 for (let key of Object.keys(keys)) {
@@ -186,9 +185,12 @@ onkeyup = function (ev) {
     let key = ev.key.toLowerCase()
     if (key == keys.invertAction) invertKeys = false
 }
-
 function modifyInputValue (inputTeleop, inputAuto, modify = 1, canInvert = true) {
     let val = canInvert && invertKeys ? -modify : modify
     if (matchStageIsTeleop) inputTeleop.value = parseInt(inputTeleop.value) + val
     else inputAuto.value = parseInt(inputAuto.value) + val
+}
+
+onbeforeunload = function (ev) { // TODO
+    // ev.preventDefault()
 }
