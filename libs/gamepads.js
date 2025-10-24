@@ -1,9 +1,9 @@
 class Gamepads {
     static setConnectListener (callback = () => {}) {
-        ongamepadconnected = ev => callback(new SimpleGamepad(ev.gamepad))
+        addEventListener("gamepadconnected", ev => callback(new SimpleGamepad(ev.gamepad)))
     }
     static setDisconnectListener (callback = () => {}) {
-        ongamepaddisconnected = ev => callback(new SimpleGamepad(ev.gamepad))
+        addEventListener("gamepaddisconnected", ev => callback(new SimpleGamepad(ev.gamepad)))
     }
     static getGamepads () {
         return navigator.getGamepads().map(val => val?.connected ? val : undefined).filter(val => val != undefined).map(val => new SimpleGamepad(val))
