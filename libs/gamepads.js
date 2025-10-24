@@ -33,7 +33,7 @@ class SimpleGamepad {
         return joysticks
     }
     get buttons () {
-        return this.#gamepad.buttons.map(val => val.value)
+        return this.#gamepad.buttons.map(val => val.value == 0 ? +val.pressed : val.value)
     }
 
     async vibrate (strength, duration) {
@@ -100,25 +100,30 @@ class SimpleGamepadCursor {
         if (!this.#leftInit) return false
         else if (this.#hasStartedLeft) return this.#gamepad.timestamp - this.#leftTimestamp >= SimpleGamepadCursor.repeatDelay
         else if (this.#leftTimestamp > -1) return this.#hasStartedLeft = true
+        else return false
     }
     get shouldMoveRight () {
         if (!this.#rightInit) return false
         else if (this.#hasStartedRight) return this.#gamepad.timestamp - this.#rightTimestamp >= SimpleGamepadCursor.repeatDelay
         else if (this.#rightTimestamp > -1) return this.#hasStartedRight = true
+        else return false
     }
     get shouldMoveUp () {
         if (!this.#upInit) return false
         else if (this.#hasStartedUp) return this.#gamepad.timestamp - this.#upTimestamp >= SimpleGamepadCursor.repeatDelay
         else if (this.#upTimestamp > -1) return this.#hasStartedUp = true
+        else return false
     }
     get shouldMoveDown () {
         if (!this.#downInit) return false
         else if (this.#hasStartedDown) return this.#gamepad.timestamp - this.#downTimestamp >= SimpleGamepadCursor.repeatDelay
         else if (this.#downTimestamp > -1) return this.#hasStartedDown = true
+        else return false
     }
     get shouldClick () {
         if (!this.#clickInit) return false
         else if (this.#hasStartedClick) return this.#gamepad.timestamp - this.#clickTimestamp >= SimpleGamepadCursor.repeatDelay
         else if (this.#clickTimestamp > -1) return this.#hasStartedClick = true
+        else return false
     }
 }
