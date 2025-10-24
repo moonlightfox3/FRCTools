@@ -1,44 +1,49 @@
 class Gamepads {
     static setConnectListener (callback = () => {}) {
-        addEventListener("gamepadconnected", ev => callback(new SimpleGamepad(ev.gamepad)))
+        addEventListener("gamepadconnected", ev => callback(new SimpleGamepad(ev.gamepad.index)))
     }
     static setDisconnectListener (callback = () => {}) {
-        addEventListener("gamepaddisconnected", ev => callback(new SimpleGamepad(ev.gamepad)))
+        addEventListener("gamepaddisconnected", ev => callback(new SimpleGamepad(ev.gamepad.index)))
     }
     static getGamepads () {
-        return navigator.getGamepads().filter(val => val?.connected).map(val => new SimpleGamepad(val))
+        return navigator.getGamepads().filter(val => val?.connected).map(val => new SimpleGamepad(val.index))
     }
 }
 class SimpleGamepad {
-    #gamepad
+    #index
     #cursor
-    constructor (gamepad) {
-        this.#gamepad = gamepad
+    constructor (index) {
+        this.#index = index
         this.#cursor = new SimpleGamepadCursor(this)
+    }
+    get #get () {
+        return navigator.getGamepads()[this.#index]
     }
 
     get id () {
-        return this.#gamepad.index
+        return this.#index
     }
     get info () {
-        return this.#gamepad.id
+        return this.#get.id
     }
     get timestamp () {
-        return this.#gamepad.timestamp
+        return this.#get.timestamp
     }
 
     get joysticks () {
         let joysticks = []
-        for (let i = 0; i < this.#gamepad.axes.length; i += 2) joysticks.push([this.#gamepad.axes[i], this.#gamepad.axes[i + 1]])
+        let axes = this.#get.axes
+        for (let i = 0; i < axes.length; i += 2) joysticks.push([this.axes[i], this.axes[i + 1]])
         return joysticks
     }
     get buttons () {
-        return this.#gamepad.buttons.map(val => val.value == 0 ? +val.pressed : val.value)
+        return this.#index.buttons.map(val => val.value == 0 ? +val.pressed : val.value)
     }
 
     async vibrate (strength, duration) {
-        if (this.#gamepad.vibrationActuator == undefined) return false
-        await this.#gamepad.vibrationActuator.playEffect("dual-rumble", {
+        let vibration = this.#get.vibrationActuator
+        if (vibration == undefined) return false
+        await vibration.playEffect("dual-rumble", {
             duration,
             strongMagnitude: strength,
             weakMagnitude: strength,
@@ -46,8 +51,9 @@ class SimpleGamepad {
         return true
     }
     async stopVibrate () {
-        if (this.#gamepad.vibrationActuator == undefined) return false
-        await this.#gamepad.vibrationActuator.reset()
+        let vibration = this.#get.vibrationActuator
+        if (vibration == undefined) return false
+        await vibration.reset()
         return true
     }
 
@@ -66,22 +72,23 @@ class SimpleGamepadCursor {
 
     update () {
         let joystick = this.#gamepad.joysticks[0]
+        let timestamp = this.#gamepad.timestamp
         if (this.#leftInit == false) this.#leftInit = joystick[0] >= -SimpleGamepadCursor.deadzone
-        else if (this.#leftTimestamp == -1) this.#leftTimestamp = joystick[0] < -SimpleGamepadCursor.deadzone ? this.#gamepad.timestamp : -1
+        else if (this.#leftTimestamp == -1) this.#leftTimestamp = joystick[0] < -SimpleGamepadCursor.deadzone ? timestamp : -1
         else if (joystick[0] >= -SimpleGamepadCursor.deadzone) this.#leftTimestamp = -1, this.#hasStartedLeft = false
         if (this.#rightInit == false) this.#rightInit = joystick[0] <= SimpleGamepadCursor.deadzone
-        else if (this.#rightTimestamp == -1) this.#rightTimestamp = joystick[0] > SimpleGamepadCursor.deadzone ? this.#gamepad.timestamp : -1
+        else if (this.#rightTimestamp == -1) this.#rightTimestamp = joystick[0] > SimpleGamepadCursor.deadzone ? timestamp : -1
         else if (joystick[0] <= SimpleGamepadCursor.deadzone) this.#rightTimestamp = -1, this.#hasStartedRight = false
         if (this.#upInit == false) this.#upInit = joystick[1] >= -SimpleGamepadCursor.deadzone
-        else if (this.#upTimestamp == -1) this.#upTimestamp = joystick[1] < -SimpleGamepadCursor.deadzone ? this.#gamepad.timestamp : -1
+        else if (this.#upTimestamp == -1) this.#upTimestamp = joystick[1] < -SimpleGamepadCursor.deadzone ? timestamp : -1
         else if (joystick[1] >= -SimpleGamepadCursor.deadzone) this.#upTimestamp = -1, this.#hasStartedUp = false
         if (this.#downInit == false) this.#downInit = joystick[1] <= SimpleGamepadCursor.deadzone
-        else if (this.#downTimestamp == -1) this.#downTimestamp = joystick[1] > SimpleGamepadCursor.deadzone ? this.#gamepad.timestamp : -1
+        else if (this.#downTimestamp == -1) this.#downTimestamp = joystick[1] > SimpleGamepadCursor.deadzone ? timestamp : -1
         else if (joystick[1] <= SimpleGamepadCursor.deadzone) this.#downTimestamp = -1, this.#hasStartedDown = false
 
         let isClicking = this.#gamepad.buttons.findIndex(val => val > 0) > -1
         if (this.#clickInit == false) this.#clickInit = !isClicking
-        else if (this.#clickTimestamp == -1) this.#clickTimestamp = isClicking ? this.#gamepad.timestamp : -1
+        else if (this.#clickTimestamp == -1) this.#clickTimestamp = isClicking ? timestamp : -1
         else if (!isClicking) this.#clickTimestamp = -1, this.#hasStartedClick = false
     }
 
