@@ -38,7 +38,11 @@ class SimpleGamepad {
 
     async vibrate (strength, duration) {
         if (this.#gamepad.vibrationActuator == undefined) return false
-        await this.#gamepad.vibrationActuator.pulse(strength, duration)
+        await this.#gamepad.vibrationActuator.playEffect("dual-rumble", {
+            duration,
+            strongMagnitude: strength,
+            weakMagnitude: strength,
+        })
         return true
     }
     async stopVibrate () {
