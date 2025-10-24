@@ -12,13 +12,25 @@
 
     button {
         background-color: lightgray;
+        color: black;
         border-radius: 5px;
         cursor: pointer;
     }
 </style>
 
 <h2>FRCTools</h2>
-<a href="./simple_scouting/index.html"><button>Simple Scouting</button></a>
+<a href="./simple_scouting/index.html" autofocus><button>Simple Scouting</button></a><br>
 
+<script src="./libs/gamepads.js"></script>
+<script src="./libs/indexCursor.js"></script>
 <script>
+    onload = function () {
+        indexCursorInit(
+            false,
+            document.querySelectorAll("button"),
+            el => el.style.color = "gray",
+            el => el.style.color = "black",
+            el => el.parentElement.click(),
+        )
+    }
 </script>

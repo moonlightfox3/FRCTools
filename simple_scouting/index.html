@@ -32,6 +32,8 @@
 
 <div id="yearsEl"></div>
 
+<script src="../libs/gamepads.js"></script>
+<script src="../libs/indexCursor.js"></script>
 <script>
     const years = {
         2025: "Reefscape",
@@ -39,7 +41,8 @@
     let currentYear = new Date().getFullYear()
 
     yearsEl.innerText = ""
-    for (let year of Object.keys(years)) {
+    for (let i = 0; i < Object.keys(years).length; i++) {
+        let year = Object.keys(years)[i]
         let name = years[year]
 
         let a = document.createElement("a")
@@ -54,9 +57,14 @@
         
         a.append(button)
         yearsEl.append(a)
+        if (i == 0) button.focus()
     }
-    onkeydown = function (ev) {
-        if (ev.repeat) return
-        if (ev.key == "Enter") document.getElementById(`${currentYear}`).click()
-    }
+
+    indexCursorInit(
+        true,
+        document.querySelectorAll("button"),
+        el => el.style.color = "gray",
+        el => el.style.color = "black",
+        el => el.click(),
+    )
 </script>
