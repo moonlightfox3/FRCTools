@@ -33,7 +33,7 @@ class SimpleGamepad {
     get joysticks () {
         let joysticks = []
         let axes = this.#get.axes
-        for (let i = 0; i < axes.length; i += 2) joysticks.push([this.axes[i], this.axes[i + 1]])
+        for (let i = 0; i < axes.length; i += 2) joysticks.push([axes[i], axes[i + 1]])
         return joysticks
     }
     get buttons () {
