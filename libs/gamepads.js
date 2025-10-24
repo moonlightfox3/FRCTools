@@ -37,7 +37,7 @@ class SimpleGamepad {
         return joysticks
     }
     get buttons () {
-        return this.#index.buttons.map(val => val.value == 0 ? +val.pressed : val.value)
+        return this.#get.buttons.map(val => val.value == 0 ? +val.pressed : val.value)
     }
 
     async vibrate (strength, duration) {
