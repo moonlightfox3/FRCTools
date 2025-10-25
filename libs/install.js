@@ -50,7 +50,11 @@ if (!isPWA) {
     if (isIphone) {
         showInstallButton(async function () {
             try {
-                await navigator.share(data)
+                await navigator.share({
+                    title: "Simple Scouting for FRC",
+                    text: "FRC Scouting",
+                    url: location.href,
+                })
             } catch (er) {}
         })
     } else {
