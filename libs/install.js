@@ -45,25 +45,12 @@ if (!isPWA) {
             installButton = null
         }
     }
+
     addEventListener("appinstalled", () => hideInstallButton())
-
-    if (isIphone) {
-        showInstallButton(async function () {
-            try {
-                await navigator.share({
-                    title: "Simple Scouting for FRC",
-                    text: "FRC Scouting",
-                    url: location.href,
-                })
-            } catch (er) {}
-        })
-    } else {
-        addEventListener("beforeinstallprompt", function (ev) {
-            ev.preventDefault()
-
-            showInstallButton(() => ev.prompt())
-        })
-    }
+    addEventListener("beforeinstallprompt", function (ev) {
+        ev.preventDefault()
+        showInstallButton(() => ev.prompt())
+    })
 } else {
     resizeTo(1105, 585)
     if (isIphone) setThemeColor("black")
