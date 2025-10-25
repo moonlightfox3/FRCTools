@@ -9,6 +9,9 @@ addEventListener("beforeinstallprompt", function (ev) {
     button.style.backgroundColor = "lightgray"
     button.style.borderRadius = "5px"
     button.style.cursor = "pointer"
-    button.onclick = () => ev.prompt()
+    button.onclick = async function () {
+        let result = await ev.prompt()
+        if (result.outcome == "accepted") button.remove()
+    }
     document.body.append(button)
 })
