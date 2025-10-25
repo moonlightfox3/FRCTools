@@ -2,17 +2,9 @@
 <title>Select Year</title>
 <link rel="icon apple-touch-icon" href="./icon.svg">
 <link rel="manifest" href="./manifest.json">
+<link rel="stylesheet" href="../libs/style.css">
 <style>
-    * {
-        outline: none;
-        user-select: none;
-    }
-    body, ::selection {
-        background-color: black;
-        color: lightgray;
-    }
-
-    button {
+    button.year {
         background-color: lightgray;
         border-radius: 5px;
         cursor: pointer;
@@ -21,7 +13,7 @@
         width: 200px;
         height: 160px;
     }
-    img {
+    img.year-img {
         border-radius: 5px;
         border: 1px solid black;
 
@@ -34,6 +26,7 @@
 
 <script src="../libs/gamepads.js"></script>
 <script src="../libs/indexCursor.js"></script>
+<script src="../libs/install.js"></script>
 <script>
     const years = {
         2025: "Reefscape",
@@ -48,10 +41,12 @@
         let a = document.createElement("a")
         a.href = `./year/${name}.html`
         let button = document.createElement("button")
+        button.className = "year"
         button.id = `${year}`
         button.innerText = `${name} (${year})`
 
         let img = document.createElement("img")
+        img.className = "year-img"
         img.src = `./year-img/${name}.png`
         button.append(img)
         

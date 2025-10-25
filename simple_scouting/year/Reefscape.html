@@ -2,30 +2,19 @@
 <title>Log Match - Reefscape (2025)</title>
 <link rel="icon apple-touch-icon" href="../icon.svg">
 <link rel="manifest" href="../manifest.json">
+<link rel="stylesheet" href="../../libs/style.css">
 <style>
-    * {
-        outline: none;
-        user-select: none;
-    }
-    body, ::selection {
-        background-color: black;
-        color: lightgray;
-    }
-
-    button, input, textarea {
+    input, textarea#notes {
         background-color: lightgray;
         border-radius: 5px;
     }
-    button:not([disabled]) {
-        cursor: pointer;
-    }
-    textarea {
+    textarea#notes {
         width: 344px;
         height: 225px;
         resize: none;
     }
 
-    div {
+    div.formPart {
         position: absolute;
         top: 5px;
     }
@@ -41,7 +30,7 @@
 </style>
 
 <form id="dataForm">
-    <div id="formPart1">
+    <div class="formPart" id="formPart1">
         Main:<br>
         <input id="matchNum" placeholder="Match Number (ex. Qual 1)" autofocus><input id="teamNum" placeholder="Team Number (ex. 1234)"><br>
         <label for="robotCame">Robot showed up:</label><input type="checkbox" id="robotCame" checked><br>
@@ -71,7 +60,7 @@
         Net: <input type="number" id="opAlgaeNet" value="0" placeholder="Hits"><input type="number" id="opAlgaeNetMiss" value="0" placeholder="Misses"><br>
         Descore: <input type="number" id="opAlgaeDesc" value="0" placeholder="Hits"><input type="number" id="opAlgaeDescMiss" value="0" placeholder="Misses"><br>
     </div>
-    <div id="formPart2">
+    <div class="formPart" id="formPart2">
         Resisting from defense:<br>
         <input type="radio" id="resistDefStrong" name="resistDef" value="strong"><label for="resistDefStrong">Strong</label><br>
         <input type="radio" id="resistDefWeak" name="resistDef" value="weak"><label for="resistDefWeak">Weak</label><br>
@@ -98,7 +87,7 @@
         <input type="radio" id="breakSecMore" name="breakSec" value="more"><label for="breakSecMore">61+</label><br>
         <input type="radio" id="breakSecNone" name="breakSec" value="none" checked><label for="breakSecNone">None</label><br>
     </div>
-    <div id="formPart3">
+    <div class="formPart" id="formPart3">
         Ending:<br>
         <input type="radio" id="endPosPark" name="endPos" value="park"><label for="endPosPark">Park</label><br>
         <input type="radio" id="endPosDeep" name="endPos" value="deep"><label for="endPosDeep">Deep</label><br>
@@ -113,4 +102,7 @@
     </div>
 </form>
 
+<script src="../../libs/gamepads.js"></script>
+<script src="../../libs/indexCursor.js"></script>
+<script src="../../libs/install.js"></script>
 <script src="./Reefscape.js"></script>
