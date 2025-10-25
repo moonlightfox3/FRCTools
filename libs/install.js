@@ -40,7 +40,7 @@ if (!isPWA) {
     }
 } else {
     resizeTo(1105, 585)
-    if (isIphone) setThemeColor("black") // TODO
+    if (isIphone) setThemeColor("black")
     else setThemeColor("darkviolet")
 
     if (window.launchQueue != undefined) {
