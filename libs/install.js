@@ -45,12 +45,23 @@ if (!isPWA) {
             installButton = null
         }
     }
-
     addEventListener("appinstalled", () => hideInstallButton())
-    addEventListener("beforeinstallprompt", function (ev) {
-        ev.preventDefault()
-        showInstallButton(() => ev.prompt())
-    })
+
+    if (isIphone) {
+        showInstallButton(function () {
+alert(`\
+Manual installation is required on iPhone!
+1. Press the browser share/export button.
+2. Scroll down and click 'Add to Home Screen'.
+3. Click 'Add'.\
+`)
+        })
+    } else {
+        addEventListener("beforeinstallprompt", function (ev) {
+            ev.preventDefault()
+            showInstallButton(() => ev.prompt())
+        })
+    }
 } else {
     resizeTo(1105, 585)
     if (isIphone) setThemeColor("black")
