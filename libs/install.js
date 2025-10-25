@@ -1,18 +1,24 @@
-addEventListener("beforeinstallprompt", function (ev) {
-    ev.preventDefault()
+const isPWA = matchMedia("(display-mode: standalone)").matches
 
-    let button = document.createElement("button")
-    button.innerText = "Install"
-    button.style.position = "sticky"
-    button.style.left = "calc(100% - 50px)"
-    button.style.top = "calc(100% - 30px)"
-    button.style.backgroundColor = "lightgray"
-    button.style.borderRadius = "5px"
-    button.style.cursor = "pointer"
-    button.onclick = async function () {
-        button.remove()
-        let result = await ev.prompt()
-        if (result.outcome == "dismissed") document.body.append(button)
+let installButton = null
+if (isPWA) {
+    if (installButton != null) {
+        installButton.remove()
+        installButton = null
     }
-    document.body.append(button)
-})
+} else {
+    addEventListener("beforeinstallprompt", function (ev) {
+        ev.preventDefault()
+
+        installButton = document.createElement("button")
+        installButton.innerText = "Install"
+        installButton.style.position = "sticky"
+        installButton.style.left = "calc(100% - 50px)"
+        installButton.style.top = "calc(100% - 30px)"
+        installButton.style.backgroundColor = "lightgray"
+        installButton.style.borderRadius = "5px"
+        installButton.style.cursor = "pointer"
+        installButton.onclick = () => ev.prompt()
+        document.body.append(installButton)
+    })
+}

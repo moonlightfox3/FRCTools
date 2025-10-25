@@ -1,4 +1,3 @@
-const isPWA = matchMedia("(display-mode: standalone)").matches
 if (isPWA) {
     resizeTo(1090, 575)
 
