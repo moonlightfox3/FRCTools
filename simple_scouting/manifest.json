@@ -20,7 +20,7 @@
 		}
 	],
 	"name": "Simple Scouting for FRC",
-	"short_name": "Simple Scouting",
+	"short_name": "FRC Scouting",
 	"start_url": "index.html",
 	"theme_color": "darkviolet"
 }
