@@ -1,6 +1,6 @@
 simple_scouting.html
     Add PlayStation (PS4) controller support (in addition to keyboard)
-        Make sure it always works on a phone too (with an adapter)
+        Make sure it always continues to work on a phone too
     Add key rebinding (which saves to LocalStorage)
     
     Add onbeforeunload event to confirm page exit (only triggers if any form value isn't at its default)
