@@ -1,6 +1,28 @@
 const isPWA = matchMedia("(display-mode: standalone)").matches
 const isIphone = navigator.platform == "iPhone"
 
+function handleDataImport (buf) { // TODO
+    console.debug("Data import:", buf)
+}
+
+let themeColorEl = null
+function setThemeColor (color) {
+    if (!isPWA) return
+    if (themeColorEl == null) {
+        themeColorEl = document.createElement("meta")
+        themeColorEl.name = "theme-color"
+        document.head.append(themeColorEl)
+    }
+    themeColorEl.content = color
+}
+function resetThemeColor () {
+    if (!isPWA) return
+    if (themeColorEl != null) {
+        themeColorEl.remove()
+        themeColorEl = null
+    }
+}
+
 if (!isPWA) {
     let installButton = null
     function showInstallButton (clickCallback) {
@@ -51,27 +73,5 @@ if (!isPWA) {
                 handleDataImport(buf)
             }
         })
-    }
-}
-
-function handleDataImport (buf) { // TODO
-    console.debug("Data import:", buf)
-}
-
-let themeColorEl = null
-function setThemeColor (color) {
-    if (!isPWA) return
-    if (themeColorEl == null) {
-        themeColorEl = document.createElement("meta")
-        themeColorEl.name = "theme-color"
-        document.head.append(themeColorEl)
-    }
-    themeColorEl.content = color
-}
-function resetThemeColor () {
-    if (!isPWA) return
-    if (themeColorEl != null) {
-        themeColorEl.remove()
-        themeColorEl = null
     }
 }
