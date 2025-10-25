@@ -9,12 +9,12 @@
 	}],
 	"icons": [
 		{
-			"src": "icon.svg",
+			"src": "icons/icon.svg",
 			"sizes": "any",
 			"purpose": "maskable"
 		},
 		{
-			"src": "icon.svg",
+			"src": "icons/icon.svg",
 			"sizes": "any",
 			"purpose": "any"
 		}
