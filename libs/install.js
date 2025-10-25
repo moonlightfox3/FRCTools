@@ -1,12 +1,13 @@
 const isPWA = matchMedia("(display-mode: standalone)").matches
 
-let installButton = null
-if (isPWA) {
-    if (installButton != null) {
-        installButton.remove()
-        installButton = null
-    }
-} else {
+if (!isPWA) {
+    let installButton = null
+    addEventListener("appinstalled", function () {
+        if (installButton != null) {
+            installButton.remove()
+            installButton = null
+        }
+    })
     addEventListener("beforeinstallprompt", function (ev) {
         ev.preventDefault()
 
