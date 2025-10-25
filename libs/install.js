@@ -1,15 +1,10 @@
 const isPWA = matchMedia("(display-mode: standalone)").matches
+const isIphone = navigator.platform == "iPhone"
 
 if (!isPWA) {
     let installButton = null
-    addEventListener("appinstalled", function () {
-        if (installButton != null) {
-            installButton.remove()
-            installButton = null
-        }
-    })
-    addEventListener("beforeinstallprompt", function (ev) {
-        ev.preventDefault()
+    function showInstallButton (clickCallback) {
+        hideInstallButton()
 
         installButton = document.createElement("button")
         installButton.innerText = "Install"
@@ -19,11 +14,34 @@ if (!isPWA) {
         installButton.style.backgroundColor = "lightgray"
         installButton.style.borderRadius = "5px"
         installButton.style.cursor = "pointer"
-        installButton.onclick = () => ev.prompt()
+        installButton.onclick = () => clickCallback()
         document.body.append(installButton)
-    })
+    }
+    function hideInstallButton () {
+        if (installButton != null) {
+            installButton.remove()
+            installButton = null
+        }
+    }
+    addEventListener("appinstalled", () => hideInstallButton())
+
+    if (isIphone) {
+        showInstallButton(async function () {
+            try {
+                await navigator.share(data)
+            } catch (er) {}
+        })
+    } else {
+        addEventListener("beforeinstallprompt", function (ev) {
+            ev.preventDefault()
+
+            showInstallButton(() => ev.prompt())
+        })
+    }
 } else {
     resizeTo(1105, 585)
+    if (isIphone) setThemeColor("black") // TODO
+    else setThemeColor("darkviolet")
 
     if (window.launchQueue != undefined) {
         launchQueue.setConsumer(async function (params) {
@@ -38,4 +56,22 @@ if (!isPWA) {
 
 function handleDataImport (buf) { // TODO
     console.debug("Data import:", buf)
+}
+
+let themeColorEl = null
+function setThemeColor (color) {
+    if (!isPWA) return
+    if (themeColorEl == null) {
+        themeColorEl = document.createElement("meta")
+        themeColorEl.name = "theme-color"
+        document.head.append(themeColorEl)
+    }
+    themeColorEl.content = color
+}
+function resetThemeColor () {
+    if (!isPWA) return
+    if (themeColorEl != null) {
+        themeColorEl.remove()
+        themeColorEl = null
+    }
 }
