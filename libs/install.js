@@ -22,4 +22,20 @@ if (!isPWA) {
         installButton.onclick = () => ev.prompt()
         document.body.append(installButton)
     })
+} else {
+    resizeTo(1105, 585)
+
+    if (window.launchQueue != undefined) {
+        launchQueue.setConsumer(async function (params) {
+            if (params.files.length > 0) {
+                let file = await params.files[0].getFile()
+                let buf = await file.arrayBuffer()
+                handleDataImport(buf)
+            }
+        })
+    }
+}
+
+function handleDataImport (buf) { // TODO
+    console.debug("Data import:", buf)
 }
