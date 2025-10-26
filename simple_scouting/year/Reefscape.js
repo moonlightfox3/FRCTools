@@ -192,14 +192,14 @@ let invertKeysGamepad = false
 let scoreMissGamepad = false
 let matchStageIsTeleopGamepad = false
 function checkGamepad () {
-    if (!gamepad.cursor.clickReady) return
+    if (!gamepad.cursor.isClickReady) return
 
     let buttons = gamepad.buttonsNamed
     invertKeysGamepad = buttons[gamepadKeys.invertAction] > 0
     scoreMissGamepad = buttons[gamepadKeys.scoreMiss] > 0
 }
 function onGamepadPress (key) {
-    if (!gamepad.cursor.clickReady) return
+    if (!gamepad.cursor.isClickReady) return
     
     if (key == gamepadKeys.switchStageTeleop) matchStageIsTeleopGamepad = true
     else if (key == gamepadKeys.switchStageAuto) matchStageIsTeleopGamepad = false
