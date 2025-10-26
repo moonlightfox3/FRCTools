@@ -1,4 +1,4 @@
-let keys = {
+const keys = {
     invertAction: ";",
     switchStageTeleop: " ",
     switchStageAuto: "b",
@@ -25,20 +25,36 @@ let keys = {
     playingDefenseType_None: "v",
     playingDefenseType_Passive: "g",
     playingDefenseType_Active: "h",
-    secondsBroken_1To10: "3",
-    secondsBroken_11To30: "4",
-    secondsBroken_31To60: "8",
-    secondsBroken_Over60: "9",
-    secondsBroken_None: "0",
     playingDefenseStrength_VeryWeak: "n",
     playingDefenseStrength_Weak: "m",
     playingDefenseStrength_Average: ",",
     playingDefenseStrength_Strong: ".",
     playingDefenseStrength_VeryStrong: "/",
     playingDefenseStrength_None: "'",
+    secondsBroken_1To10: "3",
+    secondsBroken_11To30: "4",
+    secondsBroken_31To60: "8",
+    secondsBroken_Over60: "9",
+    secondsBroken_None: "0",
     endType_Park: "5",
     endType_Deep: "6",
     endType_Shallow: "7",
+}
+const gamepadKeys = {
+    invertAction: "LBD", // TODO: used for - cycle focused field (match number / team number), remove score
+    switchStageAuto: "LBU",
+    switchStageTeleop: "RBU",
+    toggleRobotCame: "ML",
+    toggleRobotAutoLeftStart: "MR",
+    focusNotesField: "LU",
+    coralL1: "RU",
+    coralL2: "RL",
+    coralL3: "RD",
+    coralL4: "RR",
+    algaeProcessor: "LL",
+    algaeNet: "LD",
+    algaeDescore: "LR",
+    scoreMiss: "RBD",
 }
 const keyNamesOverride = {
     switchStageTeleop: "Switch to teleop stage",
@@ -144,17 +160,17 @@ onkeydown = function (ev) {
     else if (key == keys.playingDefenseType_None) playDefNone.checked = true
     else if (key == keys.playingDefenseType_Passive) playDefPassive.checked = true
     else if (key == keys.playingDefenseType_Active) playDefActive.checked = true
-    else if (key == keys.secondsBroken_1To10) breakSec10.checked = true
-    else if (key == keys.secondsBroken_11To30) breakSec30.checked = true
-    else if (key == keys.secondsBroken_31To60) breakSec60.checked = true
-    else if (key == keys.secondsBroken_Over60) breakSecMore.checked = true
-    else if (key == keys.secondsBroken_None) breakSecNone.checked = true
     else if (key == keys.playingDefenseStrength_VeryWeak) playDefStrenVWeak.checked = true
     else if (key == keys.playingDefenseStrength_Weak) playDefStrenWeak.checked = true
     else if (key == keys.playingDefenseStrength_Average) playDefStrenAvg.checked = true
     else if (key == keys.playingDefenseStrength_Strong) playDefStrenStrong.checked = true
     else if (key == keys.playingDefenseStrength_VeryStrong) playDefStrenVStrong.checked = true
     else if (key == keys.playingDefenseStrength_None) playDefStrenNone.checked = true
+    else if (key == keys.secondsBroken_1To10) breakSec10.checked = true
+    else if (key == keys.secondsBroken_11To30) breakSec30.checked = true
+    else if (key == keys.secondsBroken_31To60) breakSec60.checked = true
+    else if (key == keys.secondsBroken_Over60) breakSecMore.checked = true
+    else if (key == keys.secondsBroken_None) breakSecNone.checked = true
     else if (key == keys.endType_Park) invertKeys ? endPosFail.checked = true : endPosPark.checked = true
     else if (key == keys.endType_Deep) invertKeys ? endPosDeepFail.checked = true : endPosDeep.checked = true
     else if (key == keys.endType_Shallow) invertKeys ? endPosShallowFail.checked = true : endPosShallow.checked = true
