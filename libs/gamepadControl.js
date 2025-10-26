@@ -46,7 +46,6 @@ function gamepadUpdate () {
             gamepad = null
             return
         }
-        gamepadSeen = true
 
         if (gamepadCursorEls.length > 0) {
             if (gamepadSeen) {
@@ -77,6 +76,7 @@ function gamepadUpdate () {
         prevGamepadButtons = buttons
     
         gamepadLoop()
+        gamepadSeen = true
     }
 }
 gamepadUpdate()
