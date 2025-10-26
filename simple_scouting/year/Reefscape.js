@@ -209,7 +209,10 @@ function onGamepadPress (key) {
         if (invertKeysGamepad) {
             if (document.activeElement == matchNum) teamNum.focus()
             else matchNum.focus()
-        } else notes.focus()
+        } else {
+            if (document.activeElement == notes) notes.blur()
+            else notes.focus()
+        }
     } else if (key == gamepadKeys.coralL1) modifyInputValueGamepad(opCoralL1, opCoralL1Miss, autoCoralL1, autoCoralL1Miss)
     else if (key == gamepadKeys.coralL2) modifyInputValueGamepad(opCoralL2, opCoralL2Miss, autoCoralL2, autoCoralL2Miss)
     else if (key == gamepadKeys.coralL3) modifyInputValueGamepad(opCoralL3, opCoralL3Miss, autoCoralL3, autoCoralL3Miss)
