@@ -8,24 +8,47 @@ function gamepadElCursorInit (isHorizontal, cursorEls, highlightCallback, unhigh
     gamepadElCursorHighlight = highlightCallback
     gamepadElCursorUnhighlight = unhighlightCallback
     gamepadElCursorClick = clickCallback
-    gamepadUpdate()
 }
 let gamepadElCursorHighlight = el => {}
 let gamepadElCursorUnhighlight = el => {}
 let gamepadElCursorClick = el => {}
 
-let gamepadCursorIsHorizontal = null
-let gamepadCursorEls = null
-let gamepadCursorPos = 0
+function gamepadLoopInit (loopCallback) {
+    gamepadLoop = loopCallback
+}
+let gamepadLoop = () => {}
+
+function gamepadPressListenerInit (pressCallback, unpressCallback) {
+    gamepadPressCallback = pressCallback
+    gamepadUnpressCallback = unpressCallback
+}
+let gamepadPressCallback = key => {}
+let gamepadUnpressCallback = key => {}
+
 let gamepadSeen = false
+let gamepadCursorIsHorizontal = true
+let gamepadCursorEls = []
+let gamepadCursorPos = 0
+let prevGamepadButtons = null
 function gamepadUpdate () {
+    requestAnimationFrame(gamepadUpdate)
+
     if (gamepad == null) {
-        gamepadElCursorUnhighlight(gamepadCursorEls[gamepadCursorPos])
+        if (gamepadSeen) {
+            gamepadElCursorUnhighlight(gamepadCursorEls[gamepadCursorPos])
+            prevGamepadButtons = null
+        }
         gamepadSeen = false
     } else {
-        try { // 'try' is only needed here because some browsers don't reset the 'gamepad' variable after a page reload for some reason
+        try { // 'try' is only needed here because some browsers don't reset the 'gamepad' variable after a page reload
             gamepad.cursor.update()
-            
+        } catch (er) {
+            gamepad = null
+            return
+        }
+        gamepadSeen = true
+
+        if (gamepadCursorEls.length > 0) {
             if (gamepadSeen) {
                 let oldCursorPos = gamepadCursorPos
                 if (gamepadCursorIsHorizontal) {
@@ -41,13 +64,19 @@ function gamepadUpdate () {
                     gamepadElCursorHighlight(gamepadCursorEls[gamepadCursorPos])
                 }
             } else gamepadElCursorHighlight(gamepadCursorEls[gamepadCursorPos])
-            gamepadSeen = true
 
             if (gamepad.cursor.isClick) gamepadElCursorClick(gamepadCursorEls[gamepadCursorPos])
-        } catch (er) {
-            gamepad = null
         }
-    }
+
+        let buttons = gamepad.buttonsNamed
+        for (let name of Object.keys(buttons)) {
+            let val = buttons[name]
+            if (val > 0 && (prevGamepadButtons == null || prevGamepadButtons[name] == 0)) gamepadPressCallback(name)
+            else if (val == 0 && (prevGamepadButtons == null || prevGamepadButtons[name] > 0)) gamepadUnpressCallback(name)
+        }
+        prevGamepadButtons = buttons
     
-    requestAnimationFrame(gamepadUpdate)
+        gamepadLoop()
+    }
 }
+gamepadUpdate()

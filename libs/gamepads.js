@@ -112,6 +112,7 @@ class SimpleGamepadCursor {
         else if (this.#clickTimestamp == -1) this.#clickTimestamp = isClicking ? timestamp : -1
         else if (!isClicking) this.#clickTimestamp = -1, this.#clickRepeatTimestamp = -1, this.#hasStartedClick = false
 
+        this.isLeftRepeat = this.#hasStartedLeft, this.isRightRepeat = this.#hasStartedRight, this.isUpRepeat = this.#hasStartedUp, this.isDownRepeat = this.#hasStartedDown, this.isClickRepeat = this.#hasStartedClick
         let left = this.#shouldMoveLeft, right = this.#shouldMoveRight, up = this.#shouldMoveUp, down = this.#shouldMoveDown, click = this.#shouldClick
         this.isLeft = left, this.isRight = right, this.isUp = up, this.isDown = down, this.isClick = click
     }
@@ -121,6 +122,11 @@ class SimpleGamepadCursor {
     isUp = false
     isDown = false
     isClick = false
+    isLeftRepeat = false
+    isRightRepeat = false
+    isUpRepeat = false
+    isDownRepeat = false
+    isClickRepeat = false
 
     #leftTimestamp = -1
     #rightTimestamp = -1
