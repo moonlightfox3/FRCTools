@@ -40,8 +40,8 @@ const keys = {
     endType_Deep: "6",
     endType_Shallow: "7",
 }
-const gamepadKeys = {
-    invertAction: "LBD", // TODO: used for - cycle focused field (match number / team number), remove score
+const gamepadKeys = { // TODO: wait for key to be unpressed after page load to use
+    invertAction: "LBD",
     scoreMiss: "RBD",
     switchStageTeleop: "RBU",
     switchStageAuto: "LBU",
@@ -192,11 +192,15 @@ let invertKeysGamepad = false
 let scoreMissGamepad = false
 let matchStageIsTeleopGamepad = false
 function checkGamepad () {
+    if (!gamepad.cursor.clickReady) return
+
     let buttons = gamepad.buttonsNamed
     invertKeysGamepad = buttons[gamepadKeys.invertAction] > 0
     scoreMissGamepad = buttons[gamepadKeys.scoreMiss] > 0
 }
 function onGamepadPress (key) {
+    if (!gamepad.cursor.clickReady) return
+    
     if (key == gamepadKeys.switchStageTeleop) matchStageIsTeleopGamepad = true
     else if (key == gamepadKeys.switchStageAuto) matchStageIsTeleopGamepad = false
     else if (key == gamepadKeys.toggleRobotCame) robotCame.checked = !robotCame.checked
@@ -214,9 +218,8 @@ function onGamepadPress (key) {
     else if (key == gamepadKeys.algaeNet) modifyInputValueGamepad(opAlgaeNet, opAlgaeNetMiss, autoAlgaeNet, autoAlgaeNetMiss)
     else if (key == gamepadKeys.algaeDescore) modifyInputValueGamepad(opAlgaeDesc, opAlgaeDescMiss, autoAlgaeDesc, autoAlgaeDescMiss)
 }
-function onGamepadUnpress (key) {}
 gamepadLoopInit(checkGamepad)
-gamepadPressListenerInit(onGamepadPress, onGamepadUnpress)
+gamepadPressListenerInit(onGamepadPress, key => {})
 function modifyInputValueGamepad (inputTeleopHit, inputTeleopMiss, inputAutoHit, inputAutoMiss) {
     let val = invertKeysGamepad ? -1 : 1
     if (matchStageIsTeleopGamepad) {
