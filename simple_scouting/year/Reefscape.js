@@ -1,3 +1,5 @@
+matchNum.focus()
+
 const keys = {
     invertAction: ";",
     switchStageTeleop: " ",
