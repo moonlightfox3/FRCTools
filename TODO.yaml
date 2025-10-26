@@ -1,11 +1,8 @@
 simple_scouting.html
     Add PlayStation (PS4) controller support (in addition to keyboard)
-        Make sure it always continues to work on a phone too
-    Add key rebinding (which saves to LocalStorage)
+        Make sure it continues to work on a phone too
     
-    Add onbeforeunload event to confirm page exit (only triggers if any form value isn't at its default)
     Add button to save (and download) match data as file (.smscdt)
 
     (Maybe) Add PWA page caching (service worker)
-    (Maybe) Add button to submit generated .smscdt file to backend (maybe php?), which saves it to a database of files
-    (Maybe) Add input history - stack, updates when pressing keys
+    (Maybe) Add button to submit generated .smscdt file to some kind of backend (maybe php?), which could save it to a database of files

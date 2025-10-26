@@ -40,7 +40,6 @@ let keys = {
     endType_Deep: "6",
     endType_Shallow: "7",
 }
-let tabSize = 4
 const keyNamesOverride = {
     switchStageTeleop: "Switch to teleop stage",
     switchStageAuto: "Switch to auto stage",
@@ -111,7 +110,7 @@ onkeydown = function (ev) {
         else if (document.activeElement == teamNum) matchNum.focus()
         else if (document.activeElement == notes) {
             let pos = notes.selectionStart
-            notes.value = notes.value.substring(0, pos) + " ".repeat(tabSize) + notes.value.substring(notes.selectionEnd)
+            notes.value = notes.value.substring(0, pos) + " ".repeat(4) + notes.value.substring(notes.selectionEnd)
             notes.selectionStart = notes.selectionEnd = pos + 4
         }
         return
