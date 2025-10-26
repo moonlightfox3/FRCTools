@@ -173,6 +173,18 @@ function modifyInputValue (inputTeleop, inputAuto, modify = 1, canInvert = true)
     else inputAuto.value = parseInt(inputAuto.value) + val
 }
 
-onbeforeunload = function (ev) { // TODO
-    // ev.preventDefault()
+onbeforeunload = function (ev) {
+    let formChanged =
+        matchNum.value != "" || teamNum.value != "" || !robotCame.checked || !autoPastLine.checked ||
+        autoCoralL1.value != "0" || autoCoralL2.value != "0" || autoCoralL3.value != "0" || autoCoralL4.value != "0" ||
+        autoCoralL1Miss.value != "0" || autoCoralL2Miss.value != "0" || autoCoralL3Miss.value != "0" || autoCoralL4Miss.value != "0" ||
+        autoAlgaeProc.value != "0" || autoAlgaeNet.value != "0" || autoAlgaeDesc.value != "0" ||
+        autoAlgaeProcMiss.value != "0" || autoAlgaeNetMiss.value != "0" || autoAlgaeDescMiss.value != "0" ||
+        opCoralL1.value != "0" || opCoralL2.value != "0" || opCoralL3.value != "0" || opCoralL4.value != "0" ||
+        opCoralL1Miss.value != "0" || opCoralL2Miss.value != "0" || opCoralL3Miss.value != "0" || opCoralL4Miss.value != "0" ||
+        opAlgaeProc.value != "0" || opAlgaeNet.value != "0" || opAlgaeDesc.value != "0" ||
+        opAlgaeProcMiss.value != "0" || opAlgaeNetMiss.value != "0" || opAlgaeDescMiss.value != "0" ||
+        !resistDefNone.checked || !playDefNone.checked || !playDefStrenNone.checked || breakSecNone.checked || !endPosFail.checked ||
+        notes.value != ""
+    if (formChanged) ev.preventDefault()
 }

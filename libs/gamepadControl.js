@@ -1,18 +1,18 @@
-function indexCursorInit (isHorizontal, cursorEls, highlightCallback, unhighlightCallback, clickCallback) {
-    gamepadCursorIsHorizontal = isHorizontal
-    gamepadCursorEls = cursorEls
-    indexCursorHighlight = highlightCallback
-    indexCursorUnhighlight = unhighlightCallback
-    indexCursorClick = clickCallback
-    gamepadUpdate()
-}
-let indexCursorHighlight = el => {}
-let indexCursorUnhighlight = el => {}
-let indexCursorClick = el => {}
-
 let gamepad = null
 Gamepads.setConnectListener(gp => gamepad = gp)
 Gamepads.setDisconnectListener(gp => gamepad = null)
+
+function gamepadElCursorInit (isHorizontal, cursorEls, highlightCallback, unhighlightCallback, clickCallback) {
+    gamepadCursorIsHorizontal = isHorizontal
+    gamepadCursorEls = cursorEls
+    gamepadElCursorHighlight = highlightCallback
+    gamepadElCursorUnhighlight = unhighlightCallback
+    gamepadElCursorClick = clickCallback
+    gamepadUpdate()
+}
+let gamepadElCursorHighlight = el => {}
+let gamepadElCursorUnhighlight = el => {}
+let gamepadElCursorClick = el => {}
 
 let gamepadCursorIsHorizontal = null
 let gamepadCursorEls = null
@@ -20,10 +20,10 @@ let gamepadCursorPos = 0
 let gamepadSeen = false
 function gamepadUpdate () {
     if (gamepad == null) {
-        indexCursorUnhighlight(gamepadCursorEls[gamepadCursorPos])
+        gamepadElCursorUnhighlight(gamepadCursorEls[gamepadCursorPos])
         gamepadSeen = false
     } else {
-        try { // 'try' is only needed here because some browsers don't reset the 'gamepad' variable for some reason
+        try { // 'try' is only needed here because some browsers don't reset the 'gamepad' variable after a page reload for some reason
             gamepad.cursor.update()
             
             if (gamepadSeen) {
@@ -37,13 +37,13 @@ function gamepadUpdate () {
                 }
 
                 if (gamepadCursorPos != oldCursorPos) {
-                    indexCursorUnhighlight(gamepadCursorEls[oldCursorPos])
-                    indexCursorHighlight(gamepadCursorEls[gamepadCursorPos])
+                    gamepadElCursorUnhighlight(gamepadCursorEls[oldCursorPos])
+                    gamepadElCursorHighlight(gamepadCursorEls[gamepadCursorPos])
                 }
-            } else indexCursorHighlight(gamepadCursorEls[gamepadCursorPos])
+            } else gamepadElCursorHighlight(gamepadCursorEls[gamepadCursorPos])
             gamepadSeen = true
 
-            if (gamepad.cursor.shouldClick) indexCursorClick(gamepadCursorEls[gamepadCursorPos])
+            if (gamepad.cursor.shouldClick) gamepadElCursorClick(gamepadCursorEls[gamepadCursorPos])
         } catch (er) {
             gamepad = null
         }

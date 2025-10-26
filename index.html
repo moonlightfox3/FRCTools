@@ -13,10 +13,10 @@
 <a href="./simple_scouting/index.html" autofocus><button class="link">Simple Scouting</button></a><br>
 
 <script src="./libs/gamepads.js"></script>
-<script src="./libs/indexCursor.js"></script>
+<script src="./libs/gamepadControl.js"></script>
 <script>
     onload = function () {
-        indexCursorInit(
+        gamepadElCursorInit(
             false,
             document.querySelectorAll("button"),
             el => el.style.color = "gray",
