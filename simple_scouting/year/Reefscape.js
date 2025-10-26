@@ -183,7 +183,7 @@ onbeforeunload = function (ev) {
         opCoralL1Miss.value != "0" || opCoralL2Miss.value != "0" || opCoralL3Miss.value != "0" || opCoralL4Miss.value != "0" ||
         opAlgaeProc.value != "0" || opAlgaeNet.value != "0" || opAlgaeDesc.value != "0" ||
         opAlgaeProcMiss.value != "0" || opAlgaeNetMiss.value != "0" || opAlgaeDescMiss.value != "0" ||
-        !resistDefNone.checked || !playDefNone.checked || !playDefStrenNone.checked || breakSecNone.checked || !endPosFail.checked ||
+        !resistDefNone.checked || !playDefNone.checked || !playDefStrenNone.checked || !breakSecNone.checked || !endPosFail.checked ||
         notes.value != ""
     if (formChanged) ev.preventDefault()
 }
