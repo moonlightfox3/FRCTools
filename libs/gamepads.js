@@ -92,20 +92,21 @@ class SimpleGamepadCursor {
     }
 
     update () {
-        let joystick = this.#gamepad.joysticks[0]
         let timestamp = this.#gamepad.timestamp
-        if (this.#leftInit == false) this.#leftInit = joystick[0] >= -SimpleGamepadCursor.deadzone
-        else if (this.#leftTimestamp == -1) this.#leftTimestamp = joystick[0] < -SimpleGamepadCursor.deadzone ? timestamp : -1
-        else if (joystick[0] >= -SimpleGamepadCursor.deadzone) this.#leftTimestamp = -1, this.#leftRepeatTimestamp = -1, this.#hasStartedLeft = false
-        if (this.#rightInit == false) this.#rightInit = joystick[0] <= SimpleGamepadCursor.deadzone
-        else if (this.#rightTimestamp == -1) this.#rightTimestamp = joystick[0] > SimpleGamepadCursor.deadzone ? timestamp : -1
-        else if (joystick[0] <= SimpleGamepadCursor.deadzone) this.#rightTimestamp = -1, this.#rightRepeatTimestamp = -1, this.#hasStartedRight = false
-        if (this.#upInit == false) this.#upInit = joystick[1] >= -SimpleGamepadCursor.deadzone
-        else if (this.#upTimestamp == -1) this.#upTimestamp = joystick[1] < -SimpleGamepadCursor.deadzone ? timestamp : -1
-        else if (joystick[1] >= -SimpleGamepadCursor.deadzone) this.#upTimestamp = -1, this.#upRepeatTimestamp = -1, this.#hasStartedUp = false
-        if (this.#downInit == false) this.#downInit = joystick[1] <= SimpleGamepadCursor.deadzone
-        else if (this.#downTimestamp == -1) this.#downTimestamp = joystick[1] > SimpleGamepadCursor.deadzone ? timestamp : -1
-        else if (joystick[1] <= SimpleGamepadCursor.deadzone) this.#downTimestamp = -1, this.#downRepeatTimestamp = -1, this.#hasStartedDown = false
+        
+        let joystick = this.#gamepad.joysticksNamed.left
+        if (this.#leftInit == false) this.#leftInit = joystick.x >= -SimpleGamepadCursor.deadzone
+        else if (this.#leftTimestamp == -1) this.#leftTimestamp = joystick.x < -SimpleGamepadCursor.deadzone ? timestamp : -1
+        else if (joystick.x >= -SimpleGamepadCursor.deadzone) this.#leftTimestamp = -1, this.#leftRepeatTimestamp = -1, this.#hasStartedLeft = false
+        if (this.#rightInit == false) this.#rightInit = joystick.x <= SimpleGamepadCursor.deadzone
+        else if (this.#rightTimestamp == -1) this.#rightTimestamp = joystick.x > SimpleGamepadCursor.deadzone ? timestamp : -1
+        else if (joystick.x <= SimpleGamepadCursor.deadzone) this.#rightTimestamp = -1, this.#rightRepeatTimestamp = -1, this.#hasStartedRight = false
+        if (this.#upInit == false) this.#upInit = joystick.y >= -SimpleGamepadCursor.deadzone
+        else if (this.#upTimestamp == -1) this.#upTimestamp = joystick.y < -SimpleGamepadCursor.deadzone ? timestamp : -1
+        else if (joystick.y >= -SimpleGamepadCursor.deadzone) this.#upTimestamp = -1, this.#upRepeatTimestamp = -1, this.#hasStartedUp = false
+        if (this.#downInit == false) this.#downInit = joystick.y <= SimpleGamepadCursor.deadzone
+        else if (this.#downTimestamp == -1) this.#downTimestamp = joystick.y > SimpleGamepadCursor.deadzone ? timestamp : -1
+        else if (joystick.y <= SimpleGamepadCursor.deadzone) this.#downTimestamp = -1, this.#downRepeatTimestamp = -1, this.#hasStartedDown = false
 
         let isClicking = this.#gamepad.buttons.findIndex(val => val > 0) > -1
         if (this.#clickInit == false) this.#clickInit = !isClicking
