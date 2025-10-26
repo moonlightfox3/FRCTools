@@ -1,6 +1,6 @@
 let gamepad = null
-Gamepads.setConnectListener(gp => gamepad = gp)
-Gamepads.setDisconnectListener(gp => gamepad = null)
+Gamepads.addConnectListener(gp => gamepad = gp)
+Gamepads.addDisconnectListener(gp => gamepad = null)
 
 function gamepadElCursorInit (isHorizontal, cursorEls, highlightCallback, unhighlightCallback, clickCallback) {
     gamepadCursorIsHorizontal = isHorizontal
@@ -29,11 +29,11 @@ function gamepadUpdate () {
             if (gamepadSeen) {
                 let oldCursorPos = gamepadCursorPos
                 if (gamepadCursorIsHorizontal) {
-                    if (gamepad.cursor.shouldMoveLeft && gamepadCursorPos > 0) gamepadCursorPos--
-                    if (gamepad.cursor.shouldMoveRight && gamepadCursorPos < gamepadCursorEls.length - 1) gamepadCursorPos++
+                    if (gamepad.cursor.isLeft && gamepadCursorPos > 0) gamepadCursorPos--
+                    if (gamepad.cursor.isRight && gamepadCursorPos < gamepadCursorEls.length - 1) gamepadCursorPos++
                 } else {
-                    if (gamepad.cursor.shouldMoveUp && gamepadCursorPos > 0) gamepadCursorPos--
-                    if (gamepad.cursor.shouldMoveDown && gamepadCursorPos < gamepadCursorEls.length - 1) gamepadCursorPos++
+                    if (gamepad.cursor.isUp && gamepadCursorPos > 0) gamepadCursorPos--
+                    if (gamepad.cursor.isDown && gamepadCursorPos < gamepadCursorEls.length - 1) gamepadCursorPos++
                 }
 
                 if (gamepadCursorPos != oldCursorPos) {
@@ -43,7 +43,7 @@ function gamepadUpdate () {
             } else gamepadElCursorHighlight(gamepadCursorEls[gamepadCursorPos])
             gamepadSeen = true
 
-            if (gamepad.cursor.shouldClick) gamepadElCursorClick(gamepadCursorEls[gamepadCursorPos])
+            if (gamepad.cursor.isClick) gamepadElCursorClick(gamepadCursorEls[gamepadCursorPos])
         } catch (er) {
             gamepad = null
         }

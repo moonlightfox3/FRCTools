@@ -1,8 +1,8 @@
 class Gamepads {
-    static setConnectListener (callback = () => {}) {
+    static addConnectListener (callback = () => {}) {
         addEventListener("gamepadconnected", ev => callback(new SimpleGamepad(ev.gamepad.index)))
     }
-    static setDisconnectListener (callback = () => {}) {
+    static addDisconnectListener (callback = () => {}) {
         addEventListener("gamepaddisconnected", ev => callback(new SimpleGamepad(ev.gamepad.index)))
     }
     static getGamepads () {
@@ -107,12 +107,20 @@ class SimpleGamepadCursor {
         if (this.#downInit == false) this.#downInit = joystick.y <= SimpleGamepadCursor.deadzone
         else if (this.#downTimestamp == -1) this.#downTimestamp = joystick.y > SimpleGamepadCursor.deadzone ? timestamp : -1
         else if (joystick.y <= SimpleGamepadCursor.deadzone) this.#downTimestamp = -1, this.#downRepeatTimestamp = -1, this.#hasStartedDown = false
-
         let isClicking = this.#gamepad.buttons.findIndex(val => val > 0) > -1
         if (this.#clickInit == false) this.#clickInit = !isClicking
         else if (this.#clickTimestamp == -1) this.#clickTimestamp = isClicking ? timestamp : -1
         else if (!isClicking) this.#clickTimestamp = -1, this.#clickRepeatTimestamp = -1, this.#hasStartedClick = false
+
+        let left = this.#shouldMoveLeft, right = this.#shouldMoveRight, up = this.#shouldMoveUp, down = this.#shouldMoveDown, click = this.#shouldClick
+        this.isLeft = left, this.isRight = right, this.isUp = up, this.isDown = down, this.isClick = click
     }
+    
+    isLeft = false
+    isRight = false
+    isUp = false
+    isDown = false
+    isClick = false
 
     #leftTimestamp = -1
     #rightTimestamp = -1
@@ -134,7 +142,7 @@ class SimpleGamepadCursor {
     #upInit = false
     #downInit = false
     #clickInit = false
-    get shouldMoveLeft () {
+    get #shouldMoveLeft () {
         let timestamp = this.#gamepad.timestamp
         if (!this.#leftInit) return false
         else if (this.#hasStartedLeft) {
@@ -150,7 +158,7 @@ class SimpleGamepadCursor {
         } else if (this.#leftTimestamp > -1) return this.#hasStartedLeft = true
         else return false
     }
-    get shouldMoveRight () {
+    get #shouldMoveRight () {
         let timestamp = this.#gamepad.timestamp
         if (!this.#rightInit) return false
         else if (this.#hasStartedRight) {
@@ -166,7 +174,7 @@ class SimpleGamepadCursor {
         } else if (this.#rightTimestamp > -1) return this.#hasStartedRight = true
         else return false
     }
-    get shouldMoveUp () {
+    get #shouldMoveUp () {
         let timestamp = this.#gamepad.timestamp
         if (!this.#upInit) return false
         else if (this.#hasStartedUp) {
@@ -182,7 +190,7 @@ class SimpleGamepadCursor {
         } else if (this.#upTimestamp > -1) return this.#hasStartedUp = true
         else return false
     }
-    get shouldMoveDown () {
+    get #shouldMoveDown () {
         let timestamp = this.#gamepad.timestamp
         if (!this.#downInit) return false
         else if (this.#hasStartedDown) {
@@ -198,7 +206,7 @@ class SimpleGamepadCursor {
         } else if (this.#downTimestamp > -1) return this.#hasStartedDown = true
         else return false
     }
-    get shouldClick () {
+    get #shouldClick () {
         let timestamp = this.#gamepad.timestamp
         if (!this.#clickInit) return false
         else if (this.#hasStartedClick) {
