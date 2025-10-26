@@ -1,7 +1,7 @@
 const isPWA = matchMedia("(display-mode: standalone)").matches
 const isIphone = navigator.platform == "iPhone"
 
-function handleDataImport (buf) { // TODO
+function handleDataImport (buf) {
     console.debug("Data import:", buf)
 }
 
@@ -34,6 +34,7 @@ if (!isPWA) {
         installButton.style.left = "calc(100% - 50px)"
         installButton.style.top = "calc(100% - 30px)"
         installButton.style.backgroundColor = "lightgray"
+        installButton.style.color = "black"
         installButton.style.borderRadius = "5px"
         installButton.style.cursor = "pointer"
         installButton.onclick = () => clickCallback()

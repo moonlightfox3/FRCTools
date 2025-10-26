@@ -40,7 +40,7 @@ const keys = {
     endType_Deep: "6",
     endType_Shallow: "7",
 }
-const gamepadKeys = { // TODO: wait for key to be unpressed after page load to use
+const gamepadKeys = {
     invertAction: "LBD",
     scoreMiss: "RBD",
     switchStageTeleop: "RBU",

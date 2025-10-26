@@ -1,8 +1,6 @@
 simple_scouting.html
-    Add PlayStation (PS4) controller support (in addition to keyboard)
-        Make sure it continues to work on a phone too
-    
     Add button to save (and download) match data as file (.smscdt)
+        create handleDataImport function (checks what year the data is from)
 
     (Maybe) Add PWA page caching (service worker)
     (Maybe) Add button to submit generated .smscdt file to some kind of backend (maybe php?), which could save it to a database of files
