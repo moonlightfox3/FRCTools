@@ -10,6 +10,8 @@ class Gamepads {
     }
 }
 class SimpleGamepad {
+    #buttonMapping = ["RD", "RR", "RL", "RU", "LBU", "RBU", "LBD", "RBD", "ML", "MR", "JL", "JR", "LU", "LD", "LL", "LR", "MM"]
+
     #index
     #cursor
     constructor (index) {
@@ -36,8 +38,26 @@ class SimpleGamepad {
         for (let i = 0; i < axes.length; i += 2) joysticks.push([axes[i], axes[i + 1]])
         return joysticks
     }
+    get joysticksNamed () {
+        let joysticks = this.joysticks
+        return {
+            "left": {
+                "x": joysticks[0][0],
+                "y": joysticks[0][1],
+            },
+            "right": {
+                "x": joysticks[1][0],
+                "y": joysticks[1][1],
+            },
+        }
+    }
     get buttons () {
         return this.#get.buttons.map(val => val.value == 0 ? +val.pressed : val.value)
+    }
+    get buttonsNamed () {
+        let obj = {}, buttons = this.buttons
+        for (let i = 0; i < buttons.length; i++) obj[this.#buttonMapping[i] ?? `unknown${i - 17}`] = buttons[i]
+        return obj
     }
 
     async vibrate (strength, duration) {
