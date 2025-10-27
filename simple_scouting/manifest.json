@@ -2,9 +2,9 @@
 	"background_color": "black",
 	"display": "standalone",
 	"file_handlers": [{
-		"action": "index.html",
+		"action": "year/Reefscape.html",
 		"accept": {
-			"application/octet-stream": [".smscdt"]
+			"application/octet-stream": [".smscdt2025"]
 		}
 	}],
 	"icons": [

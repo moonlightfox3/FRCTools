@@ -1,10 +1,6 @@
 const isPWA = matchMedia("(display-mode: standalone)").matches
 const isIphone = navigator.platform == "iPhone"
 
-function handleDataImport (buf) {
-    console.debug("Data import:", buf)
-}
-
 let themeColorEl = null
 function setThemeColor (color) {
     if (!isPWA) return
@@ -70,14 +66,4 @@ Manual installation is required on iPhone!
     resizeTo(1105, 585)
     if (isIphone) setThemeColor("black")
     else setThemeColor("darkviolet")
-
-    if (window.launchQueue != undefined) {
-        launchQueue.setConsumer(async function (params) {
-            if (params.files.length > 0) {
-                let file = await params.files[0].getFile()
-                let buf = await file.arrayBuffer()
-                handleDataImport(buf)
-            }
-        })
-    }
 }

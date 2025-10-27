@@ -1,4 +1,15 @@
 matchNum.focus()
+dataElems = [
+    matchNum, teamNum, robotCame, autoPastLine,
+    autoCoralL1, autoCoralL1Miss, autoCoralL2, autoCoralL2Miss, autoCoralL3, autoCoralL3Miss, autoCoralL4, autoCoralL4Miss,
+    autoAlgaeProc, autoAlgaeProcMiss, autoAlgaeNet, autoAlgaeNetMiss, autoAlgaeDesc, autoAlgaeDescMiss,
+    opCoralL1, opCoralL1Miss, opCoralL2, opCoralL2Miss, opCoralL3, opCoralL3Miss, opCoralL4, opCoralL4Miss,
+    opAlgaeProc, opAlgaeProcMiss, opAlgaeNet, opAlgaeNetMiss, opAlgaeDesc, opAlgaeDescMiss,
+    [resistDefStrong, resistDefWeak, resistDefNone], [playDefActive, playDefPassive, playDefNone],
+    [playDefStrenVWeak, playDefStrenWeak, playDefStrenAvg, playDefStrenStrong, playDefStrenVStrong, playDefStrenNone],
+    [breakSec10, breakSec30, breakSec60, breakSecMore, breakSecNone],
+    [endPosPark, endPosDeep, endPosShallow, endPosFail, endPosDeepFail, endPosShallowFail], notes,
+]
 
 const keys = {
     invertAction: ";",
