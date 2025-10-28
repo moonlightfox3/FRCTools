@@ -11,7 +11,7 @@ if (isPWA && window.launchQueue != undefined) {
 let dataElems = null
 function importData (text) {
     if (dataElems == null) return
-    let data = JSON.parse(text)
+    let data = JSON.parse(`[${text}]`)
 
     for (let i = 0; i < dataElems.length; i++) {
         let elem = dataElems[i], val = data[i]
@@ -33,6 +33,6 @@ function exportData () {
         else if (elem instanceof Array) data[i] = elem.findIndex(val => val.checked)
     }
 
-    let text = JSON.stringify(data)
+    let text = JSON.stringify(data).slice(1, -1)
     return text
 }
