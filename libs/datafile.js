@@ -8,9 +8,10 @@ if (isPWA && window.launchQueue != undefined) {
     })
 }
 
-let dataElems = null
+let dataYear = null
+let dataElems = null // index 0 is the match number, index 1 is the team number (both are type=text inputs)
 function importData (text) {
-    if (dataElems == null) return
+    if (dataYear == null) return
     let data = JSON.parse(`[${text}]`)
 
     for (let i = 0; i < dataElems.length; i++) {
@@ -22,7 +23,7 @@ function importData (text) {
     }
 }
 function exportData () {
-    if (dataElems == null) return null
+    if (dataYear == null) return null
     let data = new Array(dataElems.length)
 
     for (let i = 0; i < dataElems.length; i++) {
@@ -35,4 +36,14 @@ function exportData () {
 
     let text = JSON.stringify(data).slice(1, -1)
     return text
+}
+
+function downloadData () {
+    let data = exportData()
+    let name = `${dataElems[0].value.replaceAll(" ", "")}-${dataElems[1].value.replaceAll(" ", "")}.smscdt${dataYear}`
+
+    let a = document.createElement("a")
+    a.download = name
+    a.href = `data:text/plain;base64,${btoa(data)}`
+    a.click()
 }

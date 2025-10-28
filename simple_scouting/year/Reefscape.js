@@ -1,4 +1,5 @@
 matchNum.focus()
+dataYear = 2025
 dataElems = [
     matchNum, teamNum, robotCame, autoPastLine,
     autoCoralL1, autoCoralL1Miss, autoCoralL2, autoCoralL2Miss, autoCoralL3, autoCoralL3Miss, autoCoralL4, autoCoralL4Miss,
@@ -52,6 +53,7 @@ const keys = {
     endType_Park: "5",
     endType_Deep: "6",
     endType_Shallow: "7",
+    saveData: "enter",
 }
 const gamepadKeys = {
     invertAction: "LBD",
@@ -68,6 +70,7 @@ const gamepadKeys = {
     algaeProcessor: "LL",
     algaeNet: "LD",
     algaeDescore: "LR",
+    saveData: "MM",
 }
 const keyNamesOverride = {
     switchStageTeleop: "Switch to teleop stage",
@@ -96,7 +99,7 @@ const keyNamesInvertedOverride = {
 }
 // Unused keys:
 //  `, 1, 2, -, =, [, ], \
-//  Backspace, Enter
+//  Backspace
 let keyNames = {}
 let keyNamesInverted = {}
 for (let key of Object.keys(keys)) {
@@ -186,6 +189,7 @@ onkeydown = function (ev) {
     else if (key == keys.endType_Park) invertKeysKeyboard ? endPosFail.checked = true : endPosPark.checked = true
     else if (key == keys.endType_Deep) invertKeysKeyboard ? endPosDeepFail.checked = true : endPosDeep.checked = true
     else if (key == keys.endType_Shallow) invertKeysKeyboard ? endPosShallowFail.checked = true : endPosShallow.checked = true
+    else if (key == keys.saveData) downloadData()
 
     else shouldCancel = false
     if (shouldCancel) ev.preventDefault()
@@ -232,6 +236,7 @@ function onGamepadPress (key) {
     else if (key == gamepadKeys.algaeProcessor) modifyInputValueGamepad(opAlgaeProc, opAlgaeProcMiss, autoAlgaeProc, autoAlgaeProcMiss)
     else if (key == gamepadKeys.algaeNet) modifyInputValueGamepad(opAlgaeNet, opAlgaeNetMiss, autoAlgaeNet, autoAlgaeNetMiss)
     else if (key == gamepadKeys.algaeDescore) modifyInputValueGamepad(opAlgaeDesc, opAlgaeDescMiss, autoAlgaeDesc, autoAlgaeDescMiss)
+    else if (key == gamepadKeys.saveData) downloadData()
 }
 gamepadLoopInit(checkGamepad)
 gamepadPressListenerInit(onGamepadPress, key => {})

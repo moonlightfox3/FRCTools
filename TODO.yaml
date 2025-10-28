@@ -1,6 +1,5 @@
 simple_scouting.html
-    Add button to save (and download) match data as a file (.smscdtYYYY, where YYYY is a year)
-        Make sure importing a .smscdtYYYY file works
+    Add keybind rebinding (saves to LocalStorage)
 
     (Maybe) Add PWA page caching (service worker)
     (Maybe) Add button to submit generated .smscdt file to some kind of backend (maybe php?), which could save it to a database of files
