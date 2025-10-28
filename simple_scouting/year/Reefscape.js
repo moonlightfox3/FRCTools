@@ -135,13 +135,12 @@ onkeydown = function (ev) {
     if (key == "escape") return document.activeElement.blur()
     else if (key == "tab") {
         ev.preventDefault()
-        if (document.activeElement == matchNum) teamNum.focus()
-        else if (document.activeElement == teamNum) matchNum.focus()
-        else if (document.activeElement == notes) {
+        if (document.activeElement == notes) {
             let pos = notes.selectionStart
             notes.value = notes.value.substring(0, pos) + " ".repeat(4) + notes.value.substring(notes.selectionEnd)
             notes.selectionStart = notes.selectionEnd = pos + 4
-        }
+        } else if (document.activeElement == matchNum) teamNum.focus()
+        else matchNum.focus()
         return
     }
     if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
