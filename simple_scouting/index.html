@@ -5,21 +5,40 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="stylesheet" href="../libs/style.css">
 <style>
+    div#yearsEl {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
     button.year {
-        background-color: lightgray;
+        background-color: darkgray;
+        cursor: pointer;
         color: black;
         border-radius: 5px;
-        cursor: pointer;
 
         display: inline-block;
-        width: 200px;
-        height: 160px;
+        width: 220px;
+        height: 180px;
     }
+    button.year.current {
+        background-color: lightgray;
+    }
+    button.year.unreleased {
+        background-color: gray;
+        cursor: default;
+    }
+    button.year[disabled] {
+        cursor: default;
+    }
+
     img.year-img {
-        border-radius: 5px;
+        background-color: black;
         border: 1px solid black;
+        border-radius: 5px;
 
         width: 100%;
+        height: auto;
         margin-top: 3px;
     }
 </style>
@@ -31,21 +50,28 @@
 <script src="../libs/install.js"></script>
 <script>
     const years = {
+        2024: "Crescendo",
         2025: "Reefscape",
+        2026: "Rebuilt",
     }
-    let currentYear = new Date().getFullYear()
+    const unreleasedYears = [2026]
+    const unavailableYears = [2026]
 
-    yearsEl.innerText = ""
+    let currentYear = new Date().getFullYear()
     for (let i = 0; i < Object.keys(years).length; i++) {
         let year = Object.keys(years)[i]
         let name = years[year]
 
         let a = document.createElement("a")
+        a.className = "year-link"
         a.href = `./year/${name}.html`
         let button = document.createElement("button")
         button.className = "year"
         button.id = `${year}`
         button.innerText = `${name} (${year})`
+        if (currentYear == +year) button.classList.add("current")
+        if (unreleasedYears.includes(+year)) button.classList.add("unreleased")
+        button.disabled = unavailableYears.includes(+year)
 
         let img = document.createElement("img")
         img.className = "year-img"

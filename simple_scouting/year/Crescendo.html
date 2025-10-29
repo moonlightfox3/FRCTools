@@ -1,0 +1,105 @@
+<!doctype html>
+<title>Log Match - Crescendo (2024)</title>
+<link rel="icon" href="../icons/icon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon-180x180.png">
+<link rel="manifest" href="../manifest.json">
+<link rel="stylesheet" href="../../libs/style.css">
+<style>
+    input, textarea#notes {
+        background-color: lightgray;
+        color: black;
+        border-radius: 5px;
+    }
+    textarea#notes {
+        width: 344px;
+        height: 225px;
+        resize: none;
+    }
+    button#saveData, button#resetData, button#returnToYearSelect {
+        background-color: lightgray;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    div.formPart {
+        position: absolute;
+        top: 5px;
+    }
+    div#formPart1 {
+        left: 5px;
+    }
+    div#formPart2 {
+        left: 495px;
+    }
+	div#formPart3 {
+		left: 715px;
+	}
+</style>
+
+<form id="dataForm">
+    <div class="formPart" id="formPart1">
+        Main:<br>
+        <input id="matchNum" placeholder="Match number (ex. Qual 1)"><input id="teamNum" placeholder="Team number (ex. 1234)"><br>
+        <label for="robotCame">Robot showed up:</label><input type="checkbox" id="robotCame" checked><br>
+        <br>
+
+        Auto:<br>
+        <label for="autoPastLine">Left starting line:</label><input type="checkbox" id="autoPastLine" checked><br>
+        Notes:<br>
+        Speaker: <input type="number" id="autoNoteSpk" value="0" placeholder="Hits"><input type="number" id="autoNoteSpkMiss" value="0" placeholder="Misses"><br>
+        Amp: <input type="number" id="autoNoteAmp" value="0" placeholder="Hits"><input type="number" id="autoNoteAmpMiss" value="0" placeholder="Misses"><br>
+        <br>
+        
+        Teleop:<br>
+        Notes:<br>
+        Speaker: <input type="number" id="opNoteSpk" value="0" placeholder="Hits"><input type="number" id="opNoteSpkMiss" value="0" placeholder="Misses"><br>
+        Amp: <input type="number" id="opNoteAmp" value="0" placeholder="Hits"><input type="number" id="opNoteAmpMiss" value="0" placeholder="Misses"><br>
+        <br>
+    </div>
+    <div class="formPart" id="formPart2">
+        Resisting from defense:<br>
+        <input type="radio" id="resistDefStrong" name="resistDef" value="strong"><label for="resistDefStrong">Strong</label><br>
+        <input type="radio" id="resistDefWeak" name="resistDef" value="weak"><label for="resistDefWeak">Weak</label><br>
+        <input type="radio" id="resistDefNone" name="resistDef" value="none" checked class="defaultChecked"><label for="resistDefNone">None</label><br>
+        <br>
+        
+        Playing defense type:<br>
+        <input type="radio" id="playDefActive" name="playDef" value="active"><label for="playDefActive">Active</label><br>
+        <input type="radio" id="playDefPassive" name="playDef" value="passive"><label for="playDefPassive">Passive</label><br>
+        <input type="radio" id="playDefNone" name="playDef" value="none" checked class="defaultChecked"><label for="playDefNone">None</label><br>
+        
+        Playing defense strength:<br>
+        <input type="radio" id="playDefStrenVWeak" name="playDefStren" value="vWeak"><label for="playDefStrenVWeak">Very weak</label><br>
+        <input type="radio" id="playDefStrenWeak" name="playDefStren" value="weak"><label for="playDefStrenWeak">Weak</label><br>
+        <input type="radio" id="playDefStrenAvg" name="playDefStren" value="avg"><label for="playDefStrenAvg">Average</label><br>
+        <input type="radio" id="playDefStrenStrong" name="playDefStren" value="strong"><label for="playDefStrenStrong">Strong</label><br>
+        <input type="radio" id="playDefStrenVStrong" name="playDefStren" value="vStrong"><label for="playDefStrenVStrong">Very strong</label><br>
+        <input type="radio" id="playDefStrenNone" name="playDefStren" value="none" checked class="defaultChecked"><label for="playDefStrenNone">None</label><br>
+        
+        Seconds broken down:<br>
+        <input type="radio" id="breakSec10" name="breakSec" value="10"><label for="breakSec10">1-10</label><br>
+        <input type="radio" id="breakSec30" name="breakSec" value="30"><label for="breakSec30">11-30</label><br>
+        <input type="radio" id="breakSec60" name="breakSec" value="60"><label for="breakSec60">31-60</label><br>
+        <input type="radio" id="breakSecMore" name="breakSec" value="more"><label for="breakSecMore">61+</label><br>
+        <input type="radio" id="breakSecNone" name="breakSec" value="none" checked class="defaultChecked"><label for="breakSecNone">None</label>
+    </div>
+    <div class="formPart" id="formPart3">
+        Ending:<br>
+        <label for="endTrap">Put note in trap:</label><input type="checkbox" id="endTrap" checked><br>
+        <input type="radio" id="endPosPark" name="endPos" value="park"><label for="endPosPark">Park</label><br>
+        <input type="radio" id="endPosClimb" name="endPos" value="deep"><label for="endPosClimb">Climb</label><br>
+        <input type="radio" id="endPosFail" name="endPos" value="fail" checked class="defaultChecked"><label for="endPosFail">Fail</label><br>
+        <br>
+
+        Misc notes:<br>
+        <textarea id="notes" placeholder="Notes" spellcheck="false"></textarea><br>
+        <button id="saveData" type="button">Save data</button><button id="resetData" type="reset" onclick="return confirm('Are you sure you want to reset the form?')">Reset data</button><br>
+        <a href="../index.html"><button id="returnToYearSelect" type="button">Return to year selection</button></a>
+    </div>
+</form>
+
+<script src="../../libs/gamepads.js"></script>
+<script src="../../libs/gamepadControl.js"></script>
+<script src="../../libs/install.js"></script>
+<script src="../../libs/datafile.js"></script>
+<script src="./Crescendo.js"></script>

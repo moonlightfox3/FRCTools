@@ -1,12 +1,26 @@
 {
 	"background_color": "black",
 	"display": "standalone",
-	"file_handlers": [{
-		"action": "year/Reefscape.html",
-		"accept": {
-			"application/octet-stream": [".smscdt2025"]
+	"file_handlers": [
+		{
+			"action": "year/Crescendo.html",
+			"accept": {
+				"application/octet-stream": [".smscdt2024"]
+			}
+		},
+		{
+			"action": "year/Reefscape.html",
+			"accept": {
+				"application/octet-stream": [".smscdt2025"]
+			}
+		},
+		{
+			"action": "year/Rebuilt.html",
+			"accept": {
+				"application/octet-stream": [".smscdt2026"]
+			}
 		}
-	}],
+	],
 	"icons": [
 		{
 			"src": "icons/icon.svg",
