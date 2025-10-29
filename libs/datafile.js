@@ -88,7 +88,7 @@ function getFormChanged () {
         if (el.type == "text" || el.type == "textarea") changed = el.value != ""
         else if (el.type == "number") changed = el.value != "0"
         else if (el.type == "checkbox") changed = !el.checked
-        else if (el.type == "radio") changed = (el.checked ^ (el.className == "defaultChecked")) != 0
+        else if (el instanceof Array) changed = el.find(val => val.checked).className != "defaultChecked"
 
         if (changed) return true
     }
