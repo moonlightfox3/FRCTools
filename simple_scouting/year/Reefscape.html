@@ -5,7 +5,7 @@
 <link rel="manifest" href="../manifest.json">
 <link rel="stylesheet" href="../../libs/style.css">
 <style>
-    input, textarea#notes {
+    input, textarea#notes, button#saveData, button#resetData, button#returnToYearSelect {
         background-color: lightgray;
         color: black;
         border-radius: 5px;
@@ -16,8 +16,6 @@
         resize: none;
     }
     button#saveData, button#resetData, button#returnToYearSelect {
-        background-color: lightgray;
-        border-radius: 5px;
         cursor: pointer;
     }
 
@@ -107,7 +105,8 @@
         Misc notes:<br>
         <textarea id="notes" placeholder="Notes" spellcheck="false"></textarea><br>
         <button id="saveData" type="button">Save data</button><button id="resetData" type="reset" onclick="return confirm('Are you sure you want to reset the form?')">Reset data</button><br>
-        <a href="../index.html"><button id="returnToYearSelect" type="button">Return to year selection</button></a>
+        <a href="../index.html"><button id="returnToYearSelect" type="button">Return to year selection</button></a><br>
+        Reefscape (2025)
     </div>
 </form>
 
