@@ -250,7 +250,7 @@ function modifyInputValueGamepad (inputTeleopHit, inputTeleopMiss, inputAutoHit,
         else inputAutoHit.value = parseInt(inputAutoHit.value) + val
     }
 }
-saveData.onclick = () => downloadData()
+saveData.onclick = () => downloadData();
 
 onbeforeunload = function (ev) {
     let formChanged =
