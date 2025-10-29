@@ -1,16 +1,5 @@
 matchNum.focus()
-dataYear = 2025
-dataElems = [
-    matchNum, teamNum, robotCame, autoPastLine,
-    autoCoralL1, autoCoralL1Miss, autoCoralL2, autoCoralL2Miss, autoCoralL3, autoCoralL3Miss, autoCoralL4, autoCoralL4Miss,
-    autoAlgaeProc, autoAlgaeProcMiss, autoAlgaeNet, autoAlgaeNetMiss, autoAlgaeDesc, autoAlgaeDescMiss,
-    opCoralL1, opCoralL1Miss, opCoralL2, opCoralL2Miss, opCoralL3, opCoralL3Miss, opCoralL4, opCoralL4Miss,
-    opAlgaeProc, opAlgaeProcMiss, opAlgaeNet, opAlgaeNetMiss, opAlgaeDesc, opAlgaeDescMiss,
-    [resistDefStrong, resistDefWeak, resistDefNone], [playDefActive, playDefPassive, playDefNone],
-    [playDefStrenVWeak, playDefStrenWeak, playDefStrenAvg, playDefStrenStrong, playDefStrenVStrong, playDefStrenNone],
-    [breakSec10, breakSec30, breakSec60, breakSecMore, breakSecNone],
-    [endPosPark, endPosDeep, endPosShallow, endPosFail, endPosDeepFail, endPosShallowFail], notes,
-]
+initDataFile(2025)
 
 const keys = {
     invertAction: ";",
@@ -55,6 +44,9 @@ const keys = {
     endType_Shallow: "7",
     saveData: "enter",
 }
+// Unused keys:
+//  `, 1, 2, -, =, [, ], \
+//  Backspace
 const gamepadKeys = {
     invertAction: "LBD",
     scoreMiss: "RBD",
@@ -72,6 +64,10 @@ const gamepadKeys = {
     algaeDescore: "LR",
     saveData: "MM",
 }
+// Unused gamepad keys:
+//  JL, JR
+// Unused gamepad axes:
+//  LX, LY, RX, RY
 const keyNamesOverride = {
     switchStageTeleop: "Switch to teleop stage",
     switchStageAuto: "Switch to auto stage",
@@ -97,9 +93,6 @@ const keyNamesInvertedOverride = {
     endType_Deep: "End type - Deep fail",
     endType_Shallow: "End type - Shallow fail",
 }
-// Unused keys:
-//  `, 1, 2, -, =, [, ], \
-//  Backspace
 let keyNames = {}
 let keyNamesInverted = {}
 for (let key of Object.keys(keys)) {
@@ -253,17 +246,5 @@ function modifyInputValueGamepad (inputTeleopHit, inputTeleopMiss, inputAutoHit,
 saveData.onclick = () => downloadData()
 
 onbeforeunload = function (ev) {
-    let formChanged =
-        matchNum.value != "" || teamNum.value != "" || !robotCame.checked || !autoPastLine.checked ||
-        autoCoralL1.value != "0" || autoCoralL2.value != "0" || autoCoralL3.value != "0" || autoCoralL4.value != "0" ||
-        autoCoralL1Miss.value != "0" || autoCoralL2Miss.value != "0" || autoCoralL3Miss.value != "0" || autoCoralL4Miss.value != "0" ||
-        autoAlgaeProc.value != "0" || autoAlgaeNet.value != "0" || autoAlgaeDesc.value != "0" ||
-        autoAlgaeProcMiss.value != "0" || autoAlgaeNetMiss.value != "0" || autoAlgaeDescMiss.value != "0" ||
-        opCoralL1.value != "0" || opCoralL2.value != "0" || opCoralL3.value != "0" || opCoralL4.value != "0" ||
-        opCoralL1Miss.value != "0" || opCoralL2Miss.value != "0" || opCoralL3Miss.value != "0" || opCoralL4Miss.value != "0" ||
-        opAlgaeProc.value != "0" || opAlgaeNet.value != "0" || opAlgaeDesc.value != "0" ||
-        opAlgaeProcMiss.value != "0" || opAlgaeNetMiss.value != "0" || opAlgaeDescMiss.value != "0" ||
-        !resistDefNone.checked || !playDefNone.checked || !playDefStrenNone.checked || !breakSecNone.checked || !endPosFail.checked ||
-        notes.value != ""
-    if (formChanged) ev.preventDefault()
+    if (getFormChanged()) ev.preventDefault()
 }

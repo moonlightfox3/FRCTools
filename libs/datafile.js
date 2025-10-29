@@ -8,6 +8,38 @@ if (isPWA && window.launchQueue != undefined) {
     })
 }
 
+const dataFileExcludeElems = ["br", "label", "a", "button"]
+function initDataFile (year) {
+    dataYear = year
+    dataElems = []
+
+    let divs = document.querySelector("form").querySelectorAll("div")
+    let lastRadioName = null
+    let lastRadioElems = []
+    for (let div of divs) {
+        for (let el of div.children) {
+            if (dataFileExcludeElems.includes(el.tagName.toLowerCase())) continue
+
+            if (el.tagName == "INPUT" && el.type == "radio" && el.name == lastRadioName) {
+                lastRadioElems.push(el)
+                continue
+            } else if (lastRadioName != null) {
+                dataElems.push(lastRadioElems)
+                lastRadioName = null, lastRadioElems = []
+            }
+
+            if (el.tagName == "INPUT" && el.type == "radio") {
+                lastRadioName = el.name
+                lastRadioElems.push(el)
+            } else dataElems.push(el)
+        }
+        if (lastRadioName != null) {
+            dataElems.push(lastRadioElems)
+            lastRadioName = null, lastRadioElems = []
+        }
+    }
+}
+
 let dataYear = null
 let dataElems = null // index 0 is the match number, index 1 is the team number (both are type=text inputs)
 function importData (text) {
@@ -37,8 +69,8 @@ function exportData () {
     let text = JSON.stringify(data).slice(1, -1)
     return text
 }
-
 function downloadData () {
+    if (dataYear == null) return null
     let data = exportData()
     let name = `${dataElems[0].value.replaceAll(" ", "")}-${dataElems[1].value.replaceAll(" ", "")}.smscdt${dataYear}`
 
@@ -46,4 +78,19 @@ function downloadData () {
     a.download = name
     a.href = `data:text/plain;base64,${btoa(data)}`
     a.click()
+}
+
+function getFormChanged () {
+    if (dataYear == null) return null
+
+    for (let el of dataElems) {
+        let changed = null
+        if (el.type == "text" || el.type == "textarea") changed = el.value != ""
+        else if (el.type == "number") changed = el.value != "0"
+        else if (el.type == "checkbox") changed = !el.checked
+        else if (el.type == "radio") changed = (el.checked ^ (el.className == "defaultChecked")) != 0
+
+        if (changed) return true
+    }
+    return false
 }
