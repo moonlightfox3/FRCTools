@@ -3,7 +3,8 @@ if (isPWA && window.launchQueue != undefined) {
         if (params.files.length > 0) {
             let file = await params.files[0].getFile()
             let text = await file.text()
-            importData(text)
+
+            if (text != "") importData(text)
         }
     })
 }

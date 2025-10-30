@@ -3,6 +3,12 @@
 	"display": "standalone",
 	"file_handlers": [
 		{
+			"action": "year/Placeholder.html",
+			"accept": {
+				"application/octet-stream": [".smscdt0"]
+			}
+		},
+		{
 			"action": "year/Crescendo.html",
 			"accept": {
 				"application/octet-stream": [".smscdt2024"]
