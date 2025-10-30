@@ -1,4 +1,4 @@
-initDataFile(2024)
+initDataFile(/* PLACEHOLDER */ 0)
 
 keys = {
     invertAction: ";",
@@ -7,10 +7,7 @@ keys = {
     toggleRobotCame: "t",
     toggleRobotAutoLeftStart: "y",
     focusNotesField: "p",
-    spkHit: "d",
-    ampHit: "k",
-    spkMiss: "e",
-    ampMiss: "i",
+    /* PLACEHOLDER */
     defenseResistance_None: "z",
     defenseResistance_Weak: "x",
     defenseResistance_Strong: "c",
@@ -29,12 +26,13 @@ keys = {
     secondsBroken_Over60: "9",
     secondsBroken_None: "0",
     endType_Park: "5",
-    endType_Climb: "7",
+    /* PLACEHOLDER */
     saveData: "enter",
 }
+/* PLACEHOLDER */
 // Unused keys:
-//  a, s, f, q, w, r
-//  j, l, u, o
+//  a, s, d, f, q, w, e, r
+//  j, k, l, u, i, o
 //  `, 1, 2, -, =, [, ], \
 //  Backspace
 gamepadKeys = {
@@ -45,13 +43,13 @@ gamepadKeys = {
     toggleRobotCame: "ML",
     toggleRobotAutoLeftStart: "MR",
     focusNotesField: "LU",
-    spk: "RL",
-    amp: "LR",
+    /* PLACEHOLDER */
     saveData: "MM",
 }
+/* PLACEHOLDER */
 // Unused gamepad keys:
-//  RU, RD, RR
-//  LL, LD
+//  RU, RL, RD, RR
+//  LL, LD, LR
 //  JL, JR
 // Unused gamepad axes:
 //  LX, LY, RX, RY
@@ -62,10 +60,7 @@ handleKey = function (key) {
     else if (key == keys.toggleRobotCame) robotCame.checked = !robotCame.checked
     else if (key == keys.toggleRobotAutoLeftStart) autoPastLine.checked = !autoPastLine.checked
     else if (key == keys.focusNotesField) invertKeysKeyboard ? matchNum.focus() : notes.focus()
-    else if (key == keys.spkHit) modifyInputValueKeyboard(opNoteSpk, autoNoteSpk)
-    else if (key == keys.ampHit) modifyInputValueKeyboard(opNoteAmp, autoNoteAmp)
-    else if (key == keys.spkMiss) modifyInputValueKeyboard(opNoteSpkMiss, autoNoteSpkMiss)
-    else if (key == keys.ampMiss) modifyInputValueKeyboard(opNoteAmpMiss, autoNoteAmpMiss)
+    /* PLACEHOLDER */
     else if (key == keys.defenseResistance_None) resistDefNone.checked = true
     else if (key == keys.defenseResistance_Weak) resistDefWeak.checked = true
     else if (key == keys.defenseResistance_Strong) resistDefStrong.checked = true
@@ -84,7 +79,7 @@ handleKey = function (key) {
     else if (key == keys.secondsBroken_Over60) breakSecMore.checked = true
     else if (key == keys.secondsBroken_None) breakSecNone.checked = true
     else if (key == keys.endType_Park) invertKeysKeyboard ? endPosFail.checked = true : endPosPark.checked = true
-    else if (key == keys.endType_Climb) invertKeysKeyboard ? endPosClimbFail.checked = true : endPosClimb.checked = true
+    /* PLACEHOLDER */
 
     else return false
     return true
@@ -102,8 +97,8 @@ handleKeyGamepad = function (key) {
             if (document.activeElement == notes) notes.blur()
             else notes.focus()
         }
-    } else if (key == gamepadKeys.spk) modifyInputValueGamepad(opNoteSpk, opNoteSpkMiss, autoNoteSpk, autoNoteSpkMiss)
-    else if (key == gamepadKeys.amp) modifyInputValueGamepad(opNoteAmp, opNoteAmpMiss, autoNoteAmp, autoNoteAmpMiss)
+    }
+    /* PLACEHOLDER */
 
     else return false
     return true

@@ -56,6 +56,7 @@
     }
     const unreleasedYears = [2026]
     const unavailableYears = [2026]
+    const noImgYears = []
 
     let currentYear = new Date().getFullYear()
     for (let i = 0; i < Object.keys(years).length; i++) {
@@ -73,10 +74,12 @@
         if (unreleasedYears.includes(+year)) button.classList.add("unreleased")
         button.disabled = unavailableYears.includes(+year)
 
-        let img = document.createElement("img")
-        img.className = "year-img"
-        img.src = `./year-img/${name}.png`
-        button.append(img)
+        if (!noImgYears.includes(+year)) {
+            let img = document.createElement("img")
+            img.className = "year-img"
+            img.src = `./year-img/${name}.png`
+            button.append(img)
+        }
         
         a.append(button)
         yearsEl.append(a)

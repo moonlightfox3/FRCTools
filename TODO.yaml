@@ -4,8 +4,5 @@ simple_scouting.html
     Add main file (.smscall)
         Contains a list of .smscgrpYYYY files (for multiple years)
 
-    Verify Crescendo (2024) match logging page (check rulebook)
-
-    (Maybe) Add keybind rebinding (saves to LocalStorage)
     (Maybe) Add PWA page caching (service worker)
     (Maybe) Add button to submit generated .smscdt file to some kind of backend (maybe php?), which could save it to a database of files

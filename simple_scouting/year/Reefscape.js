@@ -1,7 +1,6 @@
-matchNum.focus()
 initDataFile(2025)
 
-const keys = {
+keys = {
     invertAction: ";",
     switchStageTeleop: " ",
     switchStageAuto: "b",
@@ -47,7 +46,7 @@ const keys = {
 // Unused keys:
 //  `, 1, 2, -, =, [, ], \
 //  Backspace
-const gamepadKeys = {
+gamepadKeys = {
     invertAction: "LBD",
     scoreMiss: "RBD",
     switchStageTeleop: "RBU",
@@ -68,82 +67,9 @@ const gamepadKeys = {
 //  JL, JR
 // Unused gamepad axes:
 //  LX, LY, RX, RY
-const keyNamesOverride = {
-    switchStageTeleop: "Switch to teleop stage",
-    switchStageAuto: "Switch to auto stage",
-    toggleRobotCame: "Robot came (toggle)",
-    toggleRobotAutoLeftStart: "Robot left starting line in auto (toggle)",
-}
-const keyNamesInvertedOverride = {
-    coralL1Hit: "-1 Coral L1 hit",
-    coralL2Hit: "-1 Coral L2 hit",
-    coralL3Hit: "-1 Coral L3 hit",
-    coralL4Hit: "-1 Coral L4 hit",
-    coralL1Miss: "-1 Coral L1 miss",
-    coralL2Miss: "-1 Coral L2 miss",
-    coralL3Miss: "-1 Coral L3 miss",
-    coralL4Miss: "-1 Coral L4 miss",
-    algaeProcessorHit: "-1 Algae processor hit",
-    algaeNetHit: "-1 Algae net hit",
-    algaeDescoreHit: "-1 Algae descore hit",
-    algaeProcessorMiss: "-1 Algae processor miss",
-    algaeNetMiss: "-1 Algae net miss",
-    algaeDescoreMiss: "-1 Algae descore miss",
-    endType_Park: "End type - Park fail",
-    endType_Deep: "End type - Deep fail",
-    endType_Shallow: "End type - Shallow fail",
-}
-let keyNames = {}
-let keyNamesInverted = {}
-for (let key of Object.keys(keys)) {
-    let hasOverride = keyNamesOverride[key] != undefined, hasInvertedOverride = keyNamesInvertedOverride[key] != undefined
-    let str = ""
-    if (!hasOverride || !hasInvertedOverride) {
-        for (let i = 0; i < key.length; i++) {
-            let char = key[i]
-            if (!isNaN(char) && char != " ") {
-                if (i > 0 && key[i - 1].toLowerCase() == key[i - 1] && key[i - 1].toUpperCase() != key[i - 1]) str += " "
-                str += char
-            } else if (char.toUpperCase() == char && char.toLowerCase() != char) {
-                if (i > 0 && key[i - 1] != "_") str += ` ${char.toLowerCase()}`
-                else str += char
-            } else if (char == "_") str += " - "
-            else {
-                if (i == 0) str += char.toUpperCase()
-                else str += char
-            }
-        }
-    }
-    
-    if (hasOverride) keyNames[key] = keyNamesOverride[key]
-    else keyNames[key] = str
-    if (hasInvertedOverride) keyNamesInverted[key] = keyNamesInvertedOverride[key]
-    else keyNamesInverted[key] = str
-}
 
-let invertKeysKeyboard = false
-let matchStageIsTeleopKeyboard = false
-onkeydown = function (ev) {
-    if (ev.repeat) return
-    if (ev.ctrlKey || ev.altKey || ev.metaKey) return
-
-    let key = ev.key.toLowerCase()
-    if (key == "escape") return document.activeElement.blur()
-    else if (key == "tab") {
-        ev.preventDefault()
-        if (document.activeElement == notes) {
-            let pos = notes.selectionStart
-            notes.value = notes.value.substring(0, pos) + " ".repeat(4) + notes.value.substring(notes.selectionEnd)
-            notes.selectionStart = notes.selectionEnd = pos + 4
-        } else if (document.activeElement == matchNum) teamNum.focus()
-        else matchNum.focus()
-        return
-    }
-    if (document.activeElement == matchNum || document.activeElement == teamNum || document.activeElement == notes) return
-    let shouldCancel = true
-
-    if (key == keys.invertAction) invertKeysKeyboard = true
-    else if (key == keys.switchStageTeleop) matchStageIsTeleopKeyboard = true
+handleKey = function (key) {
+    if (key == keys.switchStageTeleop) matchStageIsTeleopKeyboard = true
     else if (key == keys.switchStageAuto) matchStageIsTeleopKeyboard = false
     else if (key == keys.toggleRobotCame) robotCame.checked = !robotCame.checked
     else if (key == keys.toggleRobotAutoLeftStart) autoPastLine.checked = !autoPastLine.checked
@@ -182,34 +108,11 @@ onkeydown = function (ev) {
     else if (key == keys.endType_Park) invertKeysKeyboard ? endPosFail.checked = true : endPosPark.checked = true
     else if (key == keys.endType_Deep) invertKeysKeyboard ? endPosDeepFail.checked = true : endPosDeep.checked = true
     else if (key == keys.endType_Shallow) invertKeysKeyboard ? endPosShallowFail.checked = true : endPosShallow.checked = true
-    else if (key == keys.saveData) downloadData()
 
-    else shouldCancel = false
-    if (shouldCancel) ev.preventDefault()
+    else return false
+    return true
 }
-onkeyup = function (ev) {
-    let key = ev.key.toLowerCase()
-    if (key == keys.invertAction) invertKeysKeyboard = false
-}
-function modifyInputValueKeyboard (inputTeleop, inputAuto) {
-    let val = invertKeysKeyboard ? -1 : 1
-    if (matchStageIsTeleopKeyboard) inputTeleop.value = parseInt(inputTeleop.value) + val
-    else inputAuto.value = parseInt(inputAuto.value) + val
-}
-
-let invertKeysGamepad = false
-let scoreMissGamepad = false
-let matchStageIsTeleopGamepad = false
-function checkGamepad () {
-    if (!gamepad.cursor.isClickReady) return
-
-    let buttons = gamepad.buttonsNamed
-    invertKeysGamepad = buttons[gamepadKeys.invertAction] > 0
-    scoreMissGamepad = buttons[gamepadKeys.scoreMiss] > 0
-}
-function onGamepadPress (key) {
-    if (!gamepad.cursor.isClickReady) return
-    
+handleKeyGamepad = function (key) {
     if (key == gamepadKeys.switchStageTeleop) matchStageIsTeleopGamepad = true
     else if (key == gamepadKeys.switchStageAuto) matchStageIsTeleopGamepad = false
     else if (key == gamepadKeys.toggleRobotCame) robotCame.checked = !robotCame.checked
@@ -229,22 +132,7 @@ function onGamepadPress (key) {
     else if (key == gamepadKeys.algaeProcessor) modifyInputValueGamepad(opAlgaeProc, opAlgaeProcMiss, autoAlgaeProc, autoAlgaeProcMiss)
     else if (key == gamepadKeys.algaeNet) modifyInputValueGamepad(opAlgaeNet, opAlgaeNetMiss, autoAlgaeNet, autoAlgaeNetMiss)
     else if (key == gamepadKeys.algaeDescore) modifyInputValueGamepad(opAlgaeDesc, opAlgaeDescMiss, autoAlgaeDesc, autoAlgaeDescMiss)
-    else if (key == gamepadKeys.saveData) downloadData()
-}
-gamepadLoopInit(checkGamepad)
-gamepadPressListenerInit(onGamepadPress, key => {})
-function modifyInputValueGamepad (inputTeleopHit, inputTeleopMiss, inputAutoHit, inputAutoMiss) {
-    let val = invertKeysGamepad ? -1 : 1
-    if (matchStageIsTeleopGamepad) {
-        if (scoreMissGamepad) inputTeleopMiss.value = parseInt(inputTeleopMiss.value) + val
-        else inputTeleopHit.value = parseInt(inputTeleopHit.value) + val
-    } else {
-        if (scoreMissGamepad) inputAutoMiss.value = parseInt(inputAutoMiss.value) + val
-        else inputAutoHit.value = parseInt(inputAutoHit.value) + val
-    }
-}
-saveData.onclick = () => downloadData()
 
-onbeforeunload = function (ev) {
-    if (getFormChanged()) ev.preventDefault()
+    else return false
+    return true
 }

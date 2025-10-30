@@ -4,35 +4,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon-180x180.png">
 <link rel="manifest" href="../manifest.json">
 <link rel="stylesheet" href="../../libs/style.css">
-<style>
-    input, textarea#notes, button#saveData, button#resetData, button#returnToYearSelect {
-        background-color: lightgray;
-        color: black;
-        border-radius: 5px;
-    }
-    textarea#notes {
-        width: 344px;
-        height: 225px;
-        resize: none;
-    }
-    button#saveData, button#resetData, button#returnToYearSelect {
-        cursor: pointer;
-    }
-    
-    div.formPart {
-        position: absolute;
-        top: 5px;
-    }
-    div#formPart1 {
-        left: 5px;
-    }
-    div#formPart2 {
-        left: 495px;
-    }
-	div#formPart3 {
-		left: 715px;
-	}
-</style>
+<link rel="stylesheet" href="../year-libs/style.css">
 
 <form id="dataForm">
     <div class="formPart" id="formPart1">
@@ -87,6 +59,7 @@
         <input type="radio" id="endPosPark" name="endPos" value="park"><label for="endPosPark">Park</label><br>
         <input type="radio" id="endPosClimb" name="endPos" value="deep"><label for="endPosClimb">Climb</label><br>
         <input type="radio" id="endPosFail" name="endPos" value="fail" checked class="defaultChecked"><label for="endPosFail">Fail</label><br>
+        <input type="radio" id="endPosClimbFail" name="endPos" value="climbFail"><label for="endPosClimbFail">Climb Fail</label><br>
         <br>
 
         Misc notes:<br>
@@ -101,4 +74,5 @@
 <script src="../../libs/gamepadControl.js"></script>
 <script src="../../libs/install.js"></script>
 <script src="../../libs/datafile.js"></script>
+<script src="../year-libs/years.js"></script>
 <script src="./Crescendo.js"></script>
