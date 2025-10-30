@@ -62,7 +62,7 @@ function onGamepadPress (key) {
     if (!gamepad.cursor.isClickReady) return
     
     if (key == gamepadKeys.saveData) downloadData()
-    else if (handleKeyGamepad()) null
+    else if (handleKeyGamepad(key)) null
 }
 function modifyInputValueGamepad (inputTeleopHit, inputTeleopMiss, inputAutoHit = inputTeleopHit, inputAutoMiss = inputTeleopMiss) {
     let val = invertKeysGamepad ? -1 : 1
