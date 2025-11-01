@@ -72,7 +72,7 @@ Manual installation is required on iPhones!
     }
 } else {
     // Window setup
-    resizeTo(1105, 585)
+    resizeTo(1105, 590)
     if (isIphone) setThemeColor("black")
     else setThemeColor("darkviolet")
 }
