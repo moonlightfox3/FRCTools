@@ -1,5 +1,7 @@
+// Config
 const gitUserName = "moonlightfox3", gitRepoName = "FRCTools"
 
+// Use the GitHub API
 async function getCommit () {
     let resp = await fetch(`https://api.github.com/repos/${gitUserName}/${gitRepoName}/commits?per_page=1`)
     let json = await resp.json()
@@ -14,6 +16,7 @@ let commit = null
     showCommitUpdate()
 })()
 
+// Get data from the commit
 let commitId = null
 let commitDate = null
 function getCommitId () {
@@ -31,6 +34,7 @@ function getCommitDate () {
     return str
 }
 
+// Show the update status element
 let updateDateEl = null
 function showCommitUpdate () {
     hideCommitUpdate()
