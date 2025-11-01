@@ -7,6 +7,7 @@ body, ::selection {
     color: lightgray;
 }
 
+/* Set main page size in relation to the window size (so the install button appears in the correct place) */
 html {
     width: 100%;
     height: 100%;

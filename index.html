@@ -16,13 +16,12 @@
 <script src="./libs/gamepads.js"></script>
 <script src="./libs/gamepadControl.js"></script>
 <script>
-    onload = function () {
-        gamepadElCursorInit(
-            false,
-            document.querySelectorAll("button"),
-            el => el.style.color = "gray",
-            el => el.style.color = "black",
-            el => el.parentElement.click(),
-        )
-    }
+    // Setup
+    gamepadElCursorInit(
+        false,
+        document.querySelectorAll("button"),
+        el => el.style.color = "gray",
+        el => el.style.color = "black",
+        el => el.parentElement.click(),
+    )
 </script>
