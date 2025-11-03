@@ -61,6 +61,7 @@
 
     // Create button elements automatically
     let currentYear = new Date().getFullYear()
+    let currentYearElIdx = null
     for (let i = 0; i < Object.keys(years).length; i++) {
         let year = Object.keys(years)[i]
         let name = years[year]
@@ -85,7 +86,10 @@
         
         a.append(button)
         yearsEl.append(a)
-        if (i == 0) button.focus()
+        if (currentYear == +year) {
+            button.focus()
+            currentYearElIdx = i
+        }
     }
 
     // Setup
@@ -95,6 +99,7 @@
         el => el.style.color = "gray",
         el => el.style.color = "black",
         el => el.click(),
+        currentYearElIdx,
     )
     displayInstallButton()
 </script>
