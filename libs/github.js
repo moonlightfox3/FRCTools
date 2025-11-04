@@ -40,10 +40,16 @@ function showCommitUpdate () {
     hideCommitUpdate()
     
     updateDateEl = document.createElement("div")
-    updateDateEl.innerText = `Updated ${commitDate} (commit ${commitId})`
+    let addEl1 = document.createElement("span")
+        addEl1.innerText = `Updated ${commitDate}`
+    let addEl2 = document.createElement("span")
+        addEl2.innerText = `(commit ${commitId})`
+    addEl1.style.display = addEl2.style.display = "inline-block"
     updateDateEl.style.position = "sticky"
     updateDateEl.style.left = "5px"
     updateDateEl.style.top = "calc(100% - 30px)"
+    updateDateEl.style.width = "calc(100% - 60px)"
+    updateDateEl.append(addEl1, " ", addEl2)
     document.body.append(updateDateEl)
 }
 function hideCommitUpdate () {

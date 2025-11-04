@@ -23,12 +23,16 @@ function resetThemeColor () {
         themeColorEl = null
     }
 }
+// Window setup
+if (isIphone) setThemeColor("black")
+else setThemeColor("darkviolet")
 
 // Install button
 let displayInstallButton = () => {}
-if (!isPWA) {
+if (isPWA) resizeTo(1105, 590) // Window setup
+else {
     let installButton = null
-    function showInstallButton (clickCallback) {
+    function showInstallButton (clickCallback = () => {}) {
         hideInstallButton()
 
         installButton = document.createElement("button")
@@ -40,6 +44,8 @@ if (!isPWA) {
         installButton.style.color = "black"
         installButton.style.borderRadius = "5px"
         installButton.style.cursor = "pointer"
+        installButton.style.padding = "6px"
+        installButton.style.fontSize = "14px"
         installButton.onclick = () => clickCallback()
         document.body.append(installButton)
     }
@@ -70,9 +76,4 @@ Manual installation is required on iPhones!
             })
         }
     }
-} else {
-    // Window setup
-    resizeTo(1105, 590)
-    if (isIphone) setThemeColor("black")
-    else setThemeColor("darkviolet")
 }
