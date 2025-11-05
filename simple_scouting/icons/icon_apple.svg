@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+    <!-- Main part -->
+    <g>
+        <circle r="18" cx="50" cy="30" stroke="darkviolet" fill="darkviolet" stroke-width="10"/>
+        <line x1="34.5" y1="44" x2="10" y2="70" stroke="darkviolet" stroke-width="10" stroke-linecap="round" mask="url('#lineend')"/>
+        <line x1="17.25" y1="62.25" x2="10" y2="70" stroke="darkviolet" stroke-width="10" stroke-linecap="round"/>
+    </g>
+
+    <!-- Mask -->
+    <defs>
+        <mask id="lineend">
+            <rect x="0" y="0" width="80" height="80" fill="white"/>
+            <circle r="18" cx="43" cy="37" fill="black"/>
+        </mask>
+    </defs>
+</svg>

@@ -32,12 +32,6 @@
 			"src": "icons/icon.svg",
 			"sizes": "any",
 			"purpose": "any"
-		},
-		{
-			"src": "icons/icon_maskable.png",
-			"sizes": "1024x1024",
-			"purpose": "maskable",
-			"type": "image/png"
 		}
 	],
 	"name": "Simple Scouting for FRC",
