@@ -1,7 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
-    <!-- Background -->
-    <circle r="40" cx="40" cy="40" fill="black"/>
-
     <!-- Main part -->
     <g>
         <circle r="15" cx="45" cy="30" fill="darkviolet" fill-opacity="0.8" stroke-width="5"/>

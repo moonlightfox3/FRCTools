@@ -3,9 +3,8 @@ simple_scouting.html
         Contains a list of .smscdtYYYY files for that year
     Add main file (.smscall)
         Contains a list of .smscgrpYYYY files (for multiple years)
-    
-    Fix the PWA icon for the tint mode on iPhones
-        Seems like apps might be able to declare multiple icons - maybe icon config settings exist?
 
     (Maybe) Add PWA page caching (service worker)
     (Maybe) Add button to submit generated .smscdt file to some kind of backend (maybe php?), which could save it to a database of files
+
+    Test on Android
