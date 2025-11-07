@@ -1,5 +1,5 @@
 // Was this opened with an exported data file?
-let openedWithFile = null
+let openedWithFile = false
 // Check for launching by opening an associated file type
 if (isPWA && window.launchQueue != undefined) {
     launchQueue.setConsumer(async function (params) {
