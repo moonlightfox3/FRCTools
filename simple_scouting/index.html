@@ -58,6 +58,16 @@
     const unreleasedYears = [2026]
     const unavailableYears = [2026]
     const noImgYears = []
+console.debug(`\
+Years:
+${Object.keys(years).map(val => `  ${val}: ${years[val]}`).join("\n")}
+Unreleased years:
+${unreleasedYears.map(val => `  ${val}`).join("\n")}
+Unavailable years:
+${unavailableYears.map(val => `  ${val}`).join("\n")}
+Years without images:
+${noImgYears.map(val => `  ${val}`).join("\n")}\
+`)
 
     // Create button elements automatically
     let currentYear = new Date().getFullYear()

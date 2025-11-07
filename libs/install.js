@@ -1,6 +1,7 @@
 // Platform
 const isPWA = matchMedia("(display-mode: standalone)").matches
 const isIphone = navigator.platform == "iPhone"
+console.debug(`Is PWA: ${isPWA}, is iPhone: ${isIphone}`)
 
 // Theme color (titlebar color on computers, second background color on iPhones)
 let themeColorEl = null

@@ -3,6 +3,7 @@ const gitUserName = "moonlightfox3", gitRepoName = "FRCTools"
 
 // Use the GitHub API
 async function getCommit () {
+    console.debug(`Getting latest commit data for GitHub repo '${gitUserName}/${gitRepoName}'`)
     let resp = await fetch(`https://api.github.com/repos/${gitUserName}/${gitRepoName}/commits?per_page=1`)
     let json = await resp.json()
     return json[0]

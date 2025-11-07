@@ -7,55 +7,64 @@ if (isPWA && window.launchQueue != undefined) {
             let text = await file.text()
 
             // Ignore empty files
-            if (text != "") importData(text)
+            if (text != "") {
+                console.debug(`Importing file '${file.name}'`)
+                importData(text)
+            }
         }
     })
 }
 
 // Elements to not include for saving
 const dataFileExcludeElems = ["br", "label", "a", "button"]
+// Current data file version
+const dataFileCurrentVersion = 1
 
 let dataYear = null
 let dataElems = null // index 0 is the match number, index 1 is the team number (both are type=text inputs)
 // Get the input elements that should be saved
 function initDataFile (year) {
     // Setup
+    console.debug(`Initializing data file for year '${year}'`)
     dataYear = year
     dataElems = []
 
-    // Forms are split into parts, to use more horizontal space
-    let divs = document.querySelector("form").querySelectorAll("div")
-    let lastRadioName = null
-    let lastRadioElems = []
-    for (let div of divs) {
-        for (let el of div.children) {
-            // Don't include some elements
-            if (dataFileExcludeElems.includes(el.tagName.toLowerCase())) continue
+    // Check version
+    if (dataFileCurrentVersion == 1) {
+        // Forms are split into parts, to use more horizontal space
+        let divs = document.querySelector("form").querySelectorAll("div")
+        let lastRadioName = null
+        let lastRadioElems = []
+        for (let div of divs) {
+            for (let el of div.children) {
+                // Don't include some elements
+                if (dataFileExcludeElems.includes(el.tagName.toLowerCase())) continue
 
-            // Radio inputs are complicated to handle
-            if (el.tagName == "INPUT" && el.type == "radio" && el.name == lastRadioName) {
-                // Part of the same group
-                lastRadioElems.push(el)
-                continue
-            } else if (lastRadioName != null) {
-                // Not a radio element that's part of the same group - after a group of radio elements
+                // Radio inputs are complicated to handle
+                if (el.tagName == "INPUT" && el.type == "radio" && el.name == lastRadioName) {
+                    // Part of the same group
+                    lastRadioElems.push(el)
+                    continue
+                } else if (lastRadioName != null) {
+                    // Not a radio element that's part of the same group - after a group of radio elements
+                    dataElems.push(lastRadioElems)
+                    lastRadioName = null, lastRadioElems = []
+                }
+
+                // More logic for radio inputs
+                if (el.tagName == "INPUT" && el.type == "radio") {
+                    // Radio element, not part of the same group
+                    lastRadioName = el.name
+                    lastRadioElems.push(el)
+                } else dataElems.push(el) // Other element
+            }
+            // Make sure to use radio group
+            if (lastRadioName != null) {
                 dataElems.push(lastRadioElems)
                 lastRadioName = null, lastRadioElems = []
             }
-
-            // More logic for radio inputs
-            if (el.tagName == "INPUT" && el.type == "radio") {
-                // Radio element, not part of the same group
-                lastRadioName = el.name
-                lastRadioElems.push(el)
-            } else dataElems.push(el) // Other element
         }
-        // Make sure to use radio group
-        if (lastRadioName != null) {
-            dataElems.push(lastRadioElems)
-            lastRadioName = null, lastRadioElems = []
-        }
-    }
+    } else return
 }
 
 // Import file
@@ -63,34 +72,42 @@ function importData (text) {
     // Check that the elements to save were gotten
     if (dataYear == null) return
     let data = JSON.parse(`[${text}]`)
-
-    // Get elements
-    for (let i = 0; i < dataElems.length; i++) {
-        let elem = dataElems[i], val = data[i]
-        // Do different things for different types of elements
-        if (elem.type == "text" || elem.type == "textarea") dataElems[i].value = val
-        else if (elem.type == "number") dataElems[i].value = `${val}`
-        else if (elem.type == "checkbox") dataElems[i].checked = val != 0
-        else if (elem instanceof Array) dataElems[i][val].checked = true
-    }
+    
+    // Check version
+    let ver = data.splice(0, 1)[0]
+    if (ver == 1) {
+        // Get elements
+        for (let i = 0; i < dataElems.length; i++) {
+            let elem = dataElems[i], val = data[i]
+            // Do different things for different types of elements
+            if (elem.type == "text" || elem.type == "textarea") dataElems[i].value = val
+            else if (elem.type == "number") dataElems[i].value = `${val}`
+            else if (elem.type == "checkbox") dataElems[i].checked = val != 0
+            else if (elem instanceof Array) dataElems[i][val].checked = true
+        }
+    } else return
 }
 // Export file
 function exportData () {
     // Check that the elements to save were gotten
     if (dataYear == null) return null
-    let data = new Array(dataElems.length)
+    let data = null
 
-    // Save elements
-    for (let i = 0; i < dataElems.length; i++) {
-        let elem = dataElems[i], val = elem.value
-        // Do different things for different types of elements
-        if (elem.type == "text" || elem.type == "textarea") data[i] = val
-        else if (elem.type == "number") data[i] = parseInt(val)
-        else if (elem.type == "checkbox") data[i] = +elem.checked
-        else if (elem instanceof Array) data[i] = elem.findIndex(val => val.checked)
-    }
+    // Check version
+    if (dataFileCurrentVersion == 1) {
+        // Save elements
+        data = new Array(dataElems.length)
+        for (let i = 0; i < dataElems.length; i++) {
+            let elem = dataElems[i], val = elem.value
+            // Do different things for different types of elements
+            if (elem.type == "text" || elem.type == "textarea") data[i] = val
+            else if (elem.type == "number") data[i] = parseInt(val)
+            else if (elem.type == "checkbox") data[i] = +elem.checked
+            else if (elem instanceof Array) data[i] = elem.findIndex(val => val.checked)
+        }
+    } else return null
 
-    let text = JSON.stringify(data).slice(1, -1)
+    let text = JSON.stringify([dataFileCurrentVersion, ...data]).slice(1, -1)
     return text
 }
 // Download file

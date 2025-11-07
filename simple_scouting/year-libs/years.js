@@ -1,3 +1,4 @@
+console.debug(`Loading default year code`)
 // Autofocus (using the 'autofocus' element attribute can be annoying for users on iPhones)
 matchNum.focus()
 
