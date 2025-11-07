@@ -73,6 +73,8 @@ function initDataFile (year) {
     } else return
 }
 function setDataElemsDefaults () {
+    dataElemsDefaultVals = []
+    
     // Check version
     if (dataFileCurrentVersion == 1) {
         // Get element values
