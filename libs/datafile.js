@@ -22,12 +22,15 @@ const dataFileCurrentVersion = 1
 
 let dataYear = null
 let dataElems = null // index 0 is the match number, index 1 is the team number (both are type=text inputs)
+
 // Get the input elements that should be saved
+let dataElemsDefaultVals = null
 function initDataFile (year) {
     // Setup
     console.debug(`Initializing data file for year '${year}'`)
     dataYear = year
     dataElems = []
+    dataElemsDefaultVals = []
 
     // Check version
     if (dataFileCurrentVersion == 1) {
@@ -64,6 +67,21 @@ function initDataFile (year) {
                 lastRadioName = null, lastRadioElems = []
             }
         }
+
+        // Set defaults
+        setDataElemsDefaults()
+    } else return
+}
+function setDataElemsDefaults () {
+    // Check version
+    if (dataFileCurrentVersion == 1) {
+        // Get element values
+        for (let el of dataElems) {
+            if (el.type == "text" || el.type == "textarea") dataElemsDefaultVals.push(el.value)
+            else if (el.type == "number") dataElemsDefaultVals.push(+el.value)
+            else if (el.type == "checkbox") dataElemsDefaultVals.push(el.checked)
+            else if (el instanceof Array) dataElemsDefaultVals.push(el.findIndex(val => val.checked))
+        }
     } else return
 }
 
@@ -86,6 +104,9 @@ function importData (text) {
             else if (elem instanceof Array) dataElems[i][val].checked = true
         }
     } else return
+
+    // Set defaults
+    setDataElemsDefaults()
 }
 // Export file
 function exportData () {
@@ -130,17 +151,18 @@ function getFormChanged () {
     // Check that the elements to save were gotten
     if (dataYear == null) return null
 
-    for (let el of dataElems) {
-        let changed = null
+    for (let i = 0; i < dataElems.length; i++) {
+        let defaultVal = dataElemsDefaultVals[i], el = dataElems[i], changed = null
         // Do different things for different types of elements
-        if (el.type == "text" || el.type == "textarea") changed = el.value != ""
-        else if (el.type == "number") changed = el.value != "0"
-        else if (el.type == "checkbox") changed = !el.checked
-        else if (el instanceof Array) changed = el.find(val => val.checked).className != "defaultChecked"
+        if (el.type == "text" || el.type == "textarea") changed = el.value != defaultVal
+        else if (el.type == "number") changed = +el.value != defaultVal
+        else if (el.type == "checkbox") changed = el.checked != defaultVal
+        else if (el instanceof Array) changed = el.findIndex(val => val.checked) != defaultVal
 
         // Was the element changed?
         if (changed) return true
     }
-    // Nothing changed
+
+    // Nothing was changed
     return false
 }
