@@ -8,6 +8,5 @@ simple_scouting.html
     (Maybe) Add button to submit generated .smscdt file to some kind of backend (maybe php?), which could save it to a database of files
 
     Fix the PWA icon for the tint mode on iPhones
-        Try adding a small black border for each part of the icon?
-        Remake it (for iPhones) with Icon Composer?
+        Remake it (for iPhones only, probably) with Icon Composer?
     Test on Android
