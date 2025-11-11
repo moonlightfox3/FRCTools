@@ -96,8 +96,9 @@ function modifyInputValueGamepad (inputTeleopHit, inputTeleopMiss, inputAutoHit 
 gamepadLoopInit(checkGamepad)
 gamepadPressListenerInit(onGamepadPress, key => {})
 
-// Download file
+// Files
 saveData.onclick = () => downloadData()
+saveGroupData.onclick = () => createGroupFile()
 // Prompt before leaving the page, if any form element was changed
 onbeforeunload = function (ev) {
     if (getFormChanged()) ev.preventDefault()
