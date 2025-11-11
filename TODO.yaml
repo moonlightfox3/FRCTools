@@ -2,3 +2,4 @@ scouting_app.html
     Add button to submit generated .smscdt file to some kind of backend (maybe php?) - it could save it to a database of files?
 
     Test on Android
+        Make sure this continues to work for Windows, chromeOS, macOS, iOS, Linux
