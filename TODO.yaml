@@ -1,6 +1,4 @@
 scouting_app.html
     Add button to submit generated .smscdt file to some kind of backend (maybe php?) - it could save it to a database of files?
 
-    Fix the PWA icon for the tint mode on iPhones
-        Remake it (for iPhones only, probably) with Icon Composer?
     Test on Android
